@@ -1,0 +1,84 @@
+{
+  "lessons": [
+    {
+      "id": "L01",
+      "number": 1,
+      "title": "Greetings & First Contact",
+      "subtitle": "Hello, how are you, thank you, goodbye",
+      "estimatedMinutes": 8,
+      "contentFile": "lesson_01.json"
+    },
+    {
+      "id": "L02",
+      "number": 2,
+      "title": "Family Introductions",
+      "subtitle": "Meet the family — parents, siblings, spouse",
+      "estimatedMinutes": 10,
+      "contentFile": "lesson_02.json"
+    },
+    {
+      "id": "L03",
+      "number": 3,
+      "title": "Numbers 1–10",
+      "subtitle": "Count, tell your age, give a phone number",
+      "estimatedMinutes": 10,
+      "contentFile": "lesson_03.json"
+    },
+    {
+      "id": "L04",
+      "number": 4,
+      "title": "Colors & Descriptions",
+      "subtitle": "Describe objects by color and size",
+      "estimatedMinutes": 10,
+      "contentFile": "lesson_04.json"
+    },
+    {
+      "id": "L05",
+      "number": 5,
+      "title": "Food & Drinks",
+      "subtitle": "Order food, express preferences",
+      "estimatedMinutes": 12,
+      "contentFile": "lesson_05.json"
+    },
+    {
+      "id": "L06",
+      "number": 6,
+      "title": "Daily Routines",
+      "subtitle": "Describe your day, morning and evening",
+      "estimatedMinutes": 12,
+      "contentFile": "lesson_06.json"
+    },
+    {
+      "id": "L07",
+      "number": 7,
+      "title": "Places & Directions",
+      "subtitle": "Ask where things are, give simple directions",
+      "estimatedMinutes": 12,
+      "contentFile": "lesson_07.json"
+    },
+    {
+      "id": "L08",
+      "number": 8,
+      "title": "Shopping & Prices",
+      "subtitle": "Buy things, ask the price, haggle",
+      "estimatedMinutes": 12,
+      "contentFile": "lesson_08.json"
+    },
+    {
+      "id": "L09",
+      "number": 9,
+      "title": "Time & Weather",
+      "subtitle": "Tell time, describe the weather",
+      "estimatedMinutes": 12,
+      "contentFile": "lesson_09.json"
+    },
+    {
+      "id": "L10",
+      "number": 10,
+      "title": "Requests & Polite Forms",
+      "subtitle": "Please, sorry, excuse me, can you help me?",
+      "estimatedMinutes": 12,
+      "contentFile": "lesson_10.json"
+    }
+  ]
+}

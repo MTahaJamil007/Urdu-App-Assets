@@ -1,0 +1,423 @@
+{
+  "id": "L01",
+  "number": 1,
+  "title": "Greetings & First Contact",
+  "subtitle": "Hello, how are you, thank you, goodbye",
+  "goal": "Greet someone respectfully, ask how they are, respond, thank them, and say goodbye.",
+  "estimatedMinutes": 8,
+  "culturalNote": "Assalam alaikum is the standard Muslim greeting and means 'Peace be upon you.' The mandatory reply is 'Wa alaikum assalam' (And peace be upon you too). Adaab is a more secular, inclusive greeting used across religions, especially in Lucknow and Hyderabad communities. Both Khuda hafiz and Allah hafiz are correct goodbyes — Khuda hafiz is older and works universally.",
+  "passingScore": 0.75,
+
+  "phrases": [
+    {
+      "id": "L01-001",
+      "lessonId": "L01",
+      "order": 1,
+      "urdu": "السلام علیکم",
+      "roman": "Assalam alaikum",
+      "english": "Peace be upon you",
+      "englishContextual": "Hello (Muslim greeting)",
+      "gender": "neutral",
+      "category": "greeting",
+      "audio": {
+        "normal": "audio/L01/L01-001-normal.m4a",
+        "slow": "audio/L01/L01-001-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Universal Muslim greeting. The most important phrase to recognize."
+    },
+    {
+      "id": "L01-002",
+      "lessonId": "L01",
+      "order": 2,
+      "urdu": "وعلیکم السلام",
+      "roman": "Wa alaikum assalam",
+      "english": "And peace be upon you (reply)",
+      "englishContextual": "Hello back (reply to Assalam alaikum)",
+      "gender": "neutral",
+      "category": "greeting",
+      "audio": {
+        "normal": "audio/L01/L01-002-normal.m4a",
+        "slow": "audio/L01/L01-002-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "The mandatory reply. Always respond when someone says Assalam alaikum to you."
+    },
+    {
+      "id": "L01-003",
+      "lessonId": "L01",
+      "order": 3,
+      "urdu": "آداب",
+      "roman": "Adaab",
+      "english": "Respectful greeting",
+      "englishContextual": "Hello (secular/respectful)",
+      "gender": "neutral",
+      "category": "greeting",
+      "audio": {
+        "normal": "audio/L01/L01-003-normal.m4a",
+        "slow": "audio/L01/L01-003-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT"],
+      "notes": "Secular greeting used across religions. Common in Lucknow/Hyderabad."
+    },
+    {
+      "id": "L01-004",
+      "lessonId": "L01",
+      "order": 4,
+      "urdu": "آپ کیسے ہیں؟",
+      "roman": "Aap kaise hain?",
+      "english": "How are you? (to a male)",
+      "englishContextual": "How are you? (asking a male)",
+      "gender": "m",
+      "category": "greeting",
+      "audio": {
+        "normal": "audio/L01/L01-004-normal.m4a",
+        "slow": "audio/L01/L01-004-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Use kaise when addressing a male. Aap is the respectful form of 'you'."
+    },
+    {
+      "id": "L01-005",
+      "lessonId": "L01",
+      "order": 5,
+      "urdu": "آپ کیسی ہیں؟",
+      "roman": "Aap kaisi hain?",
+      "english": "How are you? (to a female)",
+      "englishContextual": "How are you? (asking a female)",
+      "gender": "f",
+      "category": "greeting",
+      "audio": {
+        "normal": "audio/L01/L01-005-normal.m4a",
+        "slow": "audio/L01/L01-005-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Use kaisi when addressing a female. Note the difference from L01-004."
+    },
+    {
+      "id": "L01-006",
+      "lessonId": "L01",
+      "order": 6,
+      "urdu": "میں ٹھیک ہوں",
+      "roman": "Main theek hoon",
+      "english": "I am fine",
+      "englishContextual": "I'm fine (standard response)",
+      "gender": "neutral",
+      "category": "response",
+      "audio": {
+        "normal": "audio/L01/L01-006-normal.m4a",
+        "slow": "audio/L01/L01-006-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Theek is gender-neutral — safe answer regardless of speaker's gender."
+    },
+    {
+      "id": "L01-007",
+      "lessonId": "L01",
+      "order": 7,
+      "urdu": "شکریہ",
+      "roman": "Shukriya",
+      "english": "Thank you",
+      "englishContextual": "Thank you",
+      "gender": "neutral",
+      "category": "courtesy",
+      "audio": {
+        "normal": "audio/L01/L01-007-normal.m4a",
+        "slow": "audio/L01/L01-007-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Universal thanks. Use freely."
+    },
+    {
+      "id": "L01-008",
+      "lessonId": "L01",
+      "order": 8,
+      "urdu": "آپ کا شکریہ",
+      "roman": "Aap ka shukriya",
+      "english": "Thank you (to you, formal)",
+      "englishContextual": "Thank you (more warmth/respect)",
+      "gender": "neutral",
+      "category": "courtesy",
+      "audio": {
+        "normal": "audio/L01/L01-008-normal.m4a",
+        "slow": "audio/L01/L01-008-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT"],
+      "notes": "Warmer than just 'shukriya'. Adds the dative 'aap ka' (to you)."
+    },
+    {
+      "id": "L01-009",
+      "lessonId": "L01",
+      "order": 9,
+      "urdu": "خدا حافظ",
+      "roman": "Khuda hafiz",
+      "english": "Goodbye (lit. May God protect you)",
+      "englishContextual": "Goodbye",
+      "gender": "neutral",
+      "category": "farewell",
+      "audio": {
+        "normal": "audio/L01/L01-009-normal.m4a",
+        "slow": "audio/L01/L01-009-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Traditional, used across Pakistan and India. Allah hafiz is an alternative."
+    },
+    {
+      "id": "L01-010",
+      "lessonId": "L01",
+      "order": 10,
+      "urdu": "پھر ملیں گے",
+      "roman": "Phir milenge",
+      "english": "See you later (lit. we will meet again)",
+      "englishContextual": "See you later",
+      "gender": "neutral",
+      "category": "farewell",
+      "audio": {
+        "normal": "audio/L01/L01-010-normal.m4a",
+        "slow": "audio/L01/L01-010-slow.m4a"
+      },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT"],
+      "notes": "Casual goodbye. Pairs well with khuda hafiz."
+    }
+  ],
+
+  "reviewPhraseIds": [],
+
+  "exerciseSequence": [
+    {
+      "id": "L01-EX-001",
+      "type": "INTRODUCE",
+      "phraseId": "L01-001"
+    },
+    {
+      "id": "L01-EX-002",
+      "type": "L_TO_M",
+      "phraseId": "L01-001",
+      "distractorPhraseIds": ["L01-007", "L01-009"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-EX-003",
+      "type": "LISTEN_REPEAT",
+      "phraseId": "L01-001"
+    },
+    {
+      "id": "L01-EX-004",
+      "type": "INTRODUCE",
+      "phraseId": "L01-002"
+    },
+    {
+      "id": "L01-EX-005",
+      "type": "L_TO_M",
+      "phraseId": "L01-002",
+      "distractorPhraseIds": ["L01-001", "L01-010"],
+      "prompt": "What does this mean?",
+      "hint": "Listen carefully — this is the REPLY to Assalam alaikum."
+    },
+    {
+      "id": "L01-EX-006",
+      "type": "LISTEN_REPEAT",
+      "phraseId": "L01-002"
+    },
+    {
+      "id": "L01-EX-007",
+      "type": "INTRODUCE",
+      "phraseId": "L01-003"
+    },
+    {
+      "id": "L01-EX-008",
+      "type": "L_TO_M",
+      "phraseId": "L01-003",
+      "distractorPhraseIds": ["L01-001", "L01-009"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-EX-009",
+      "type": "INTRODUCE",
+      "phraseId": "L01-004"
+    },
+    {
+      "id": "L01-EX-010",
+      "type": "L_TO_M",
+      "phraseId": "L01-004",
+      "distractorPhraseIds": ["L01-005", "L01-006"],
+      "prompt": "What does this mean? (Pay attention to who is being asked)",
+      "hint": "Listen for kaise vs kaisi."
+    },
+    {
+      "id": "L01-EX-011",
+      "type": "INTRODUCE",
+      "phraseId": "L01-005"
+    },
+    {
+      "id": "L01-EX-012",
+      "type": "L_TO_M",
+      "phraseId": "L01-005",
+      "distractorPhraseIds": ["L01-004", "L01-006"],
+      "prompt": "What does this mean? (Pay attention to who is being asked)"
+    },
+    {
+      "id": "L01-EX-013",
+      "type": "LISTEN_REPEAT",
+      "phraseId": "L01-004"
+    },
+    {
+      "id": "L01-EX-014",
+      "type": "LISTEN_REPEAT",
+      "phraseId": "L01-005"
+    },
+    {
+      "id": "L01-EX-015",
+      "type": "INTRODUCE",
+      "phraseId": "L01-006"
+    },
+    {
+      "id": "L01-EX-016",
+      "type": "L_TO_M",
+      "phraseId": "L01-006",
+      "distractorPhraseIds": ["L01-001", "L01-007"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-EX-017",
+      "type": "LISTEN_REPEAT",
+      "phraseId": "L01-006"
+    },
+    {
+      "id": "L01-EX-018",
+      "type": "SPEAK",
+      "phraseId": "L01-006",
+      "prompt": "Say: 'I am fine'",
+      "hint": "Main theek hoon"
+    },
+    {
+      "id": "L01-EX-019",
+      "type": "INTRODUCE",
+      "phraseId": "L01-007"
+    },
+    {
+      "id": "L01-EX-020",
+      "type": "L_TO_M",
+      "phraseId": "L01-007",
+      "distractorPhraseIds": ["L01-001", "L01-009"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-EX-021",
+      "type": "INTRODUCE",
+      "phraseId": "L01-008"
+    },
+    {
+      "id": "L01-EX-022",
+      "type": "L_TO_M",
+      "phraseId": "L01-008",
+      "distractorPhraseIds": ["L01-007", "L01-006"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-EX-023",
+      "type": "INTRODUCE",
+      "phraseId": "L01-009"
+    },
+    {
+      "id": "L01-EX-024",
+      "type": "L_TO_M",
+      "phraseId": "L01-009",
+      "distractorPhraseIds": ["L01-001", "L01-010"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-EX-025",
+      "type": "INTRODUCE",
+      "phraseId": "L01-010"
+    },
+    {
+      "id": "L01-EX-026",
+      "type": "L_TO_M",
+      "phraseId": "L01-010",
+      "distractorPhraseIds": ["L01-009", "L01-008"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-EX-027",
+      "type": "SPEAK",
+      "phraseId": "L01-001",
+      "prompt": "Greet someone — say: 'Peace be upon you'",
+      "hint": "Assalam alaikum"
+    },
+    {
+      "id": "L01-EX-028",
+      "type": "SPEAK",
+      "phraseId": "L01-007",
+      "prompt": "Say: 'Thank you'",
+      "hint": "Shukriya"
+    },
+    {
+      "id": "L01-EX-029",
+      "type": "SPEAK",
+      "phraseId": "L01-009",
+      "prompt": "Say goodbye",
+      "hint": "Khuda hafiz"
+    }
+  ],
+
+  "masteryCheck": [
+    {
+      "id": "L01-MC-001",
+      "type": "L_TO_M",
+      "phraseId": "L01-001",
+      "distractorPhraseIds": ["L01-002", "L01-009"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-MC-002",
+      "type": "L_TO_M",
+      "phraseId": "L01-004",
+      "distractorPhraseIds": ["L01-005", "L01-006"],
+      "prompt": "What does this mean? (Pay attention to who is being asked)"
+    },
+    {
+      "id": "L01-MC-003",
+      "type": "SPEAK",
+      "phraseId": "L01-006",
+      "prompt": "Someone asks how you are. Reply that you're fine.",
+      "hint": null
+    },
+    {
+      "id": "L01-MC-004",
+      "type": "L_TO_M",
+      "phraseId": "L01-007",
+      "distractorPhraseIds": ["L01-009", "L01-001"],
+      "prompt": "What does this mean?"
+    },
+    {
+      "id": "L01-MC-005",
+      "type": "SPEAK",
+      "phraseId": "L01-009",
+      "prompt": "Say goodbye to your host",
+      "hint": null
+    },
+    {
+      "id": "L01-MC-006",
+      "type": "L_TO_M",
+      "phraseId": "L01-010",
+      "distractorPhraseIds": ["L01-009", "L01-008"],
+      "prompt": "What does this mean?"
+    }
+  ],
+
+  "rewards": {
+    "xp": 50,
+    "completionMessage": "Aap ne pehla sabaq pura kiya! You completed your first lesson. You can now greet, thank, and say goodbye in Urdu."
+  }
+}
