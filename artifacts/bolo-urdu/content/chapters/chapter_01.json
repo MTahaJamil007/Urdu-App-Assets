@@ -24,7 +24,12 @@
       "englishContextual": "Hello",
       "gender": "neutral",
       "category": "greeting",
-      "audio": { "normal": "audio/C01/C01-001-normal.m4a", "slow": "audio/C01/C01-001-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-001-normal.m4a", "slow": "audio/C01/sabrina/C01-001-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-001-normal.m4a",  "slow": "audio/C01/sameer/C01-001-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-001-normal.m4a", "slow": "audio/C01/daniyal/C01-001-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-001-normal.m4a",    "slow": "audio/C01/taha/C01-001-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
       "notes": "The standard Pakistani greeting. Universal across all of Pakistan."
@@ -40,7 +45,12 @@
       "englishContextual": "Hello (the reply)",
       "gender": "neutral",
       "category": "greeting",
-      "audio": { "normal": "audio/C01/C01-002-normal.m4a", "slow": "audio/C01/C01-002-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-002-normal.m4a", "slow": "audio/C01/sabrina/C01-002-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-002-normal.m4a",  "slow": "audio/C01/sameer/C01-002-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-002-normal.m4a", "slow": "audio/C01/daniyal/C01-002-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-002-normal.m4a",    "slow": "audio/C01/taha/C01-002-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
       "notes": "Always reply when someone says Assalam alaikum to you. Not replying is considered rude."
@@ -56,7 +66,12 @@
       "englishContextual": "How are you? (asking a male)",
       "gender": "m",
       "category": "greeting",
-      "audio": { "normal": "audio/C01/C01-003-normal.m4a", "slow": "audio/C01/C01-003-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-003-normal.m4a", "slow": "audio/C01/sabrina/C01-003-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-003-normal.m4a",  "slow": "audio/C01/sameer/C01-003-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-003-normal.m4a", "slow": "audio/C01/daniyal/C01-003-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-003-normal.m4a",    "slow": "audio/C01/taha/C01-003-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
       "notes": "Kaise is the masculine form. Aap is the respectful you — safe for anyone you don't know intimately."
@@ -72,7 +87,12 @@
       "englishContextual": "How are you? (asking a female)",
       "gender": "f",
       "category": "greeting",
-      "audio": { "normal": "audio/C01/C01-004-normal.m4a", "slow": "audio/C01/C01-004-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-004-normal.m4a", "slow": "audio/C01/sabrina/C01-004-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-004-normal.m4a",  "slow": "audio/C01/sameer/C01-004-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-004-normal.m4a", "slow": "audio/C01/daniyal/C01-004-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-004-normal.m4a",    "slow": "audio/C01/taha/C01-004-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
       "notes": "Note: kaisi (with -i) not kaise. First taste of gender agreement."
@@ -88,7 +108,12 @@
       "englishContextual": "I'm fine (the standard reply)",
       "gender": "neutral",
       "category": "response",
-      "audio": { "normal": "audio/C01/C01-005-normal.m4a", "slow": "audio/C01/C01-005-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-005-normal.m4a", "slow": "audio/C01/sabrina/C01-005-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-005-normal.m4a",  "slow": "audio/C01/sameer/C01-005-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-005-normal.m4a", "slow": "audio/C01/daniyal/C01-005-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-005-normal.m4a",    "slow": "audio/C01/taha/C01-005-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
       "notes": "Theek is gender-neutral — safe to say regardless of your gender."
@@ -104,7 +129,12 @@
       "englishContextual": "Thank you",
       "gender": "neutral",
       "category": "courtesy",
-      "audio": { "normal": "audio/C01/C01-006-normal.m4a", "slow": "audio/C01/C01-006-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-006-normal.m4a", "slow": "audio/C01/sabrina/C01-006-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-006-normal.m4a",  "slow": "audio/C01/sameer/C01-006-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-006-normal.m4a", "slow": "audio/C01/daniyal/C01-006-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-006-normal.m4a",    "slow": "audio/C01/taha/C01-006-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
       "notes": "Universal thanks in Pakistani Urdu."
@@ -120,7 +150,12 @@
       "englishContextual": "Thank you (with warmth and respect)",
       "gender": "neutral",
       "category": "courtesy",
-      "audio": { "normal": "audio/C01/C01-007-normal.m4a", "slow": "audio/C01/C01-007-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-007-normal.m4a", "slow": "audio/C01/sabrina/C01-007-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-007-normal.m4a",  "slow": "audio/C01/sameer/C01-007-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-007-normal.m4a", "slow": "audio/C01/daniyal/C01-007-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-007-normal.m4a",    "slow": "audio/C01/taha/C01-007-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT"],
       "notes": "Warmer than just shukriya. Use when you genuinely want to express gratitude."
@@ -136,7 +171,12 @@
       "englishContextual": "Goodbye",
       "gender": "neutral",
       "category": "farewell",
-      "audio": { "normal": "audio/C01/C01-008-normal.m4a", "slow": "audio/C01/C01-008-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-008-normal.m4a", "slow": "audio/C01/sabrina/C01-008-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-008-normal.m4a",  "slow": "audio/C01/sameer/C01-008-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-008-normal.m4a", "slow": "audio/C01/daniyal/C01-008-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-008-normal.m4a",    "slow": "audio/C01/taha/C01-008-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
       "notes": "Older generations often prefer Khuda hafiz. Universal in Pakistan."
@@ -152,7 +192,12 @@
       "englishContextual": "Goodbye (alternative form)",
       "gender": "neutral",
       "category": "farewell",
-      "audio": { "normal": "audio/C01/C01-009-normal.m4a", "slow": "audio/C01/C01-009-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-009-normal.m4a", "slow": "audio/C01/sabrina/C01-009-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-009-normal.m4a",  "slow": "audio/C01/sameer/C01-009-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-009-normal.m4a", "slow": "audio/C01/daniyal/C01-009-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-009-normal.m4a",    "slow": "audio/C01/taha/C01-009-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
       "notes": "Younger generations often prefer Allah hafiz. Equally Pakistani — use whichever feels natural."
@@ -168,7 +213,12 @@
       "englishContextual": "See you later",
       "gender": "neutral",
       "category": "farewell",
-      "audio": { "normal": "audio/C01/C01-010-normal.m4a", "slow": "audio/C01/C01-010-slow.m4a" },
+      "audio": {
+        "sabrina": { "normal": "audio/C01/sabrina/C01-010-normal.m4a", "slow": "audio/C01/sabrina/C01-010-slow.m4a" },
+        "sameer":  { "normal": "audio/C01/sameer/C01-010-normal.m4a",  "slow": "audio/C01/sameer/C01-010-slow.m4a"  },
+        "daniyal": { "normal": "audio/C01/daniyal/C01-010-normal.m4a", "slow": "audio/C01/daniyal/C01-010-slow.m4a" },
+        "taha":    { "normal": "audio/C01/taha/C01-010-normal.m4a",    "slow": "audio/C01/taha/C01-010-slow.m4a"    }
+      },
       "image": null,
       "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT"],
       "notes": "Casual goodbye. Often paired with khuda hafiz or allah hafiz."
@@ -285,7 +335,13 @@
         {
           "id": "L1-5-E1",
           "type": "SCENARIO_TURN",
-          "speakerLine": { "audio": "audio/C01/scenario/turn1.m4a", "urdu": "السلام علیکم", "roman": "Assalam alaikum", "english": "Hello (Peace be upon you)" },
+          "speakerLine": {
+            "audio": "audio/C01/sabrina/scenario/turn1.m4a",
+            "voicePackId": "sabrina",
+            "urdu": "السلام علیکم",
+            "roman": "Assalam alaikum",
+            "english": "Hello (Peace be upon you)"
+          },
           "expectedPhraseId": "C01-002",
           "prompt": "Your neighbor has greeted you. Reply.",
           "hint": null
@@ -293,7 +349,13 @@
         {
           "id": "L1-5-E2",
           "type": "SCENARIO_TURN",
-          "speakerLine": { "audio": "audio/C01/scenario/turn2.m4a", "urdu": "آپ کیسے ہیں؟", "roman": "Aap kaise hain?", "english": "How are you?" },
+          "speakerLine": {
+            "audio": "audio/C01/sabrina/scenario/turn2.m4a",
+            "voicePackId": "sabrina",
+            "urdu": "آپ کیسے ہیں؟",
+            "roman": "Aap kaise hain?",
+            "english": "How are you?"
+          },
           "expectedPhraseId": "C01-005",
           "prompt": "They're asking how you are. Say you're fine.",
           "hint": null
@@ -301,7 +363,13 @@
         {
           "id": "L1-5-E3",
           "type": "SCENARIO_TURN",
-          "speakerLine": { "audio": "audio/C01/scenario/turn3.m4a", "urdu": "یہ آپ کے لیے", "roman": "Yeh aap ke liye", "english": "This is for you (offering a sweet)" },
+          "speakerLine": {
+            "audio": "audio/C01/sabrina/scenario/turn3.m4a",
+            "voicePackId": "sabrina",
+            "urdu": "یہ آپ کے لیے",
+            "roman": "Yeh aap ke liye",
+            "english": "This is for you (offering a sweet)"
+          },
           "expectedPhraseId": "C01-007",
           "prompt": "Your neighbor brought you a sweet. Thank them warmly.",
           "hint": "Aap ka shukriya — the warmer thank you."
@@ -309,7 +377,13 @@
         {
           "id": "L1-5-E4",
           "type": "SCENARIO_TURN",
-          "speakerLine": { "audio": "audio/C01/scenario/turn4.m4a", "urdu": "اچھا، پھر ملیں گے", "roman": "Acha, phir milenge", "english": "Okay, see you later" },
+          "speakerLine": {
+            "audio": "audio/C01/sabrina/scenario/turn4.m4a",
+            "voicePackId": "sabrina",
+            "urdu": "اچھا، پھر ملیں گے",
+            "roman": "Acha, phir milenge",
+            "english": "Okay, see you later"
+          },
           "expectedPhraseId": "C01-008",
           "prompt": "They're leaving. Say goodbye.",
           "hint": "Either Khuda hafiz or Allah hafiz works."

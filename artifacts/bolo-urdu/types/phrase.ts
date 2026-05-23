@@ -22,10 +22,9 @@ export type ExerciseType =
   | 'SPEAK'
   | 'SCENARIO_TURN';
 
-export interface AudioAssets {
-  normal: string;
-  slow: string;
-}
+export type VoicePackId = 'sabrina' | 'sameer' | 'daniyal' | 'taha';
+
+export type AudioAssets = Partial<Record<VoicePackId, { normal: string; slow: string }>>;
 
 export interface Phrase {
   id: string;

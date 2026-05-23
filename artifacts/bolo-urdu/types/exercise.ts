@@ -1,4 +1,4 @@
-import { ExerciseType } from './phrase';
+import { ExerciseType, VoicePackId } from './phrase';
 
 export interface BaseExercise {
   id: string;
@@ -39,14 +39,17 @@ export interface SpeakExercise extends BaseExercise {
   hint?: string | null;
 }
 
+export interface ScenarioSpeakerLine {
+  audio: string;
+  voicePackId?: VoicePackId;
+  urdu: string;
+  roman: string;
+  english: string;
+}
+
 export interface ScenarioTurnExercise extends BaseExercise {
   type: 'SCENARIO_TURN';
-  speakerLine: {
-    audio: string;
-    urdu: string;
-    roman: string;
-    english: string;
-  };
+  speakerLine: ScenarioSpeakerLine;
   expectedPhraseId: string;
   prompt: string;
   hint: string | null;

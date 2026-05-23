@@ -1,8 +1,8 @@
+import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import { AudioButton } from '@/components/AudioButton';
 import { HintRevealer } from '@/components/HintRevealer';
 import { RecordButton } from '@/components/RecordButton';
 import { audioService } from '@/services/audioService';
@@ -34,33 +34,26 @@ export function ScenarioTurnExercise({
   const [feedbackType, setFeedbackType] = useState<'success' | 'error' | null>(null);
   const [attempts, setAttempts] = useState(0);
   const [recordEnabled, setRecordEnabled] = useState(!autoplay);
+  const [isPlayingSpeaker, setIsPlayingSpeaker] = useState(false);
   const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const speakerPhrase: Phrase = {
-    id: '__speaker__',
-    chapterId: '',
-    levelId: '',
-    order: 0,
-    urdu: exercise.speakerLine.urdu,
-    roman: exercise.speakerLine.roman,
-    english: exercise.speakerLine.english,
-    englishContextual: exercise.speakerLine.english,
-    gender: 'neutral',
-    category: 'other',
-    audio: { normal: exercise.speakerLine.audio, slow: exercise.speakerLine.audio },
-    image: null,
-    exerciseTypes: ['LISTEN_REPEAT'],
-    notes: '',
+  const playSpeakerLine = async () => {
+    setIsPlayingSpeaker(true);
+    await audioService.playAudioPath(
+      exercise.speakerLine.audio,
+      exercise.speakerLine.roman,
+      'normal'
+    );
+    setIsPlayingSpeaker(false);
+    setRecordEnabled(true);
   };
 
   useEffect(() => {
     if (autoplay) {
-      const t = setTimeout(async () => {
-        await audioService.playPhrase(speakerPhrase, 'normal');
-        setRecordEnabled(true);
-      }, 500);
+      const t = setTimeout(playSpeakerLine, 500);
       return () => clearTimeout(t);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exercise.id]);
 
   useEffect(() => {
@@ -102,15 +95,18 @@ export function ScenarioTurnExercise({
       }, config.AUTO_ADVANCE_DELAY * 2);
     } else {
       setFeedbackType('error');
-      setFeedbackMsg(`Try again — ${config.MAX_ATTEMPTS - newAttempts} more attempt${config.MAX_ATTEMPTS - newAttempts !== 1 ? 's' : ''}`);
+      const left = config.MAX_ATTEMPTS - newAttempts;
+      setFeedbackMsg(`Try again — ${left} more attempt${left !== 1 ? 's' : ''}`);
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
       setTimeout(() => { setFeedbackMsg(null); setFeedbackType(null); }, 1500);
     }
   };
 
+  const done = feedbackType === 'success' || (attempts >= config.MAX_ATTEMPTS && feedbackType === 'error');
+
   return (
     <Animated.View entering={FadeIn} style={styles.container}>
-      {/* Scene indicator */}
+      {/* Scene counter */}
       <View style={styles.sceneIndicator}>
         <Text style={[styles.sceneText, { color: '#D97706' }]}>
           Scene {turnNumber} of {totalTurns}
@@ -120,31 +116,44 @@ export function ScenarioTurnExercise({
       {/* Speaker card */}
       <View style={[styles.speakerCard, { backgroundColor: '#FFFBEB', borderColor: '#FDE68A' }]}>
         <Text style={[styles.speakerLabel, { color: '#92400E' }]}>Your neighbor says</Text>
-        <Text style={[styles.speakerRoman, { color: '#78350F' }]}>{exercise.speakerLine.roman}</Text>
-        <Text style={[styles.speakerEnglish, { color: '#92400E' }]}>{exercise.speakerLine.english}</Text>
-        <AudioButton phrase={speakerPhrase} speed="normal" size="small" />
+        <Text style={[styles.speakerRoman, { color: '#78350F' }]}>
+          {exercise.speakerLine.roman}
+        </Text>
+        <Text style={[styles.speakerEnglish, { color: '#92400E' }]}>
+          {exercise.speakerLine.english}
+        </Text>
+
+        <TouchableOpacity
+          onPress={playSpeakerLine}
+          disabled={isPlayingSpeaker}
+          style={[styles.playBtn, { backgroundColor: isPlayingSpeaker ? '#FDE68A' : '#D97706' }]}
+          activeOpacity={0.8}
+        >
+          <Ionicons name={isPlayingSpeaker ? 'pause' : 'volume-high'} size={18} color="#fff" />
+          <Text style={styles.playBtnText}>
+            {isPlayingSpeaker ? 'Playing…' : 'Replay'}
+          </Text>
+        </TouchableOpacity>
       </View>
 
-      {/* Prompt */}
+      {/* Your turn */}
       <View style={[styles.promptCard, { backgroundColor: '#F0FDF4', borderColor: '#86EFAC' }]}>
         <Text style={[styles.promptLabel, { color: '#166534' }]}>Your turn</Text>
         <Text style={[styles.promptText, { color: '#14532D' }]}>{exercise.prompt}</Text>
       </View>
 
       {/* Hint */}
-      {exercise.hint && (
-        <HintRevealer hint={exercise.hint} />
-      )}
+      {exercise.hint && <HintRevealer hint={exercise.hint} />}
 
       {/* Record */}
       <RecordButton
         onResult={handleResult}
-        disabled={!recordEnabled || feedbackType === 'success'}
+        disabled={!recordEnabled || done}
       />
 
       {!recordEnabled && (
         <Text style={[styles.waitText, { color: colors.mutedForeground }]}>
-          Listen first...
+          Listen first…
         </Text>
       )}
 
@@ -173,18 +182,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 16,
-    gap: 20,
+    paddingTop: 12,
+    gap: 18,
     alignItems: 'center',
   },
-  sceneIndicator: {
-    alignSelf: 'flex-end',
-  },
-  sceneText: {
-    fontSize: 12,
-    fontFamily: 'Inter_700Bold',
-    letterSpacing: 0.8,
-  },
+  sceneIndicator: { alignSelf: 'flex-end' },
+  sceneText: { fontSize: 12, fontFamily: 'Inter_700Bold', letterSpacing: 0.8 },
   speakerCard: {
     width: '100%',
     borderRadius: 16,
@@ -193,22 +196,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
   },
-  speakerLabel: {
-    fontSize: 11,
-    fontFamily: 'Inter_600SemiBold',
-    letterSpacing: 1,
-    textTransform: 'uppercase',
+  speakerLabel: { fontSize: 11, fontFamily: 'Inter_600SemiBold', letterSpacing: 1, textTransform: 'uppercase' },
+  speakerRoman: { fontSize: 22, fontFamily: 'Inter_700Bold', textAlign: 'center' },
+  speakerEnglish: { fontSize: 14, fontFamily: 'Inter_400Regular', textAlign: 'center' },
+  playBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 18,
+    paddingVertical: 9,
+    borderRadius: 20,
+    marginTop: 4,
   },
-  speakerRoman: {
-    fontSize: 22,
-    fontFamily: 'Inter_700Bold',
-    textAlign: 'center',
-  },
-  speakerEnglish: {
-    fontSize: 14,
-    fontFamily: 'Inter_400Regular',
-    textAlign: 'center',
-  },
+  playBtnText: { fontSize: 13, fontFamily: 'Inter_600SemiBold', color: '#fff' },
   promptCard: {
     width: '100%',
     borderRadius: 14,
@@ -217,22 +217,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 6,
   },
-  promptLabel: {
-    fontSize: 11,
-    fontFamily: 'Inter_600SemiBold',
-    letterSpacing: 1,
-    textTransform: 'uppercase',
-  },
-  promptText: {
-    fontSize: 17,
-    fontFamily: 'Inter_600SemiBold',
-    textAlign: 'center',
-  },
-  waitText: {
-    fontSize: 14,
-    fontFamily: 'Inter_500Medium',
-    fontStyle: 'italic',
-  },
+  promptLabel: { fontSize: 11, fontFamily: 'Inter_600SemiBold', letterSpacing: 1, textTransform: 'uppercase' },
+  promptText: { fontSize: 17, fontFamily: 'Inter_600SemiBold', textAlign: 'center' },
+  waitText: { fontSize: 14, fontFamily: 'Inter_500Medium', fontStyle: 'italic' },
   feedbackBanner: {
     width: '100%',
     paddingVertical: 14,
@@ -241,9 +228,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: 'center',
   },
-  feedbackText: {
-    fontSize: 16,
-    fontFamily: 'Inter_600SemiBold',
-    textAlign: 'center',
-  },
+  feedbackText: { fontSize: 16, fontFamily: 'Inter_600SemiBold', textAlign: 'center' },
 });

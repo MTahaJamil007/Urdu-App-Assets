@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sabrina",
+    "displayName": "Sabrina",
+    "description": "A warm Karachi accent. Clear and easy to follow.",
+    "gender": "f",
+    "recordingStatus": "pending"
+  },
+  {
+    "id": "sameer",
+    "displayName": "Sameer",
+    "description": "A confident Lahori accent. Familiar to many heritage learners.",
+    "gender": "m",
+    "recordingStatus": "pending"
+  },
+  {
+    "id": "daniyal",
+    "displayName": "Daniyal",
+    "description": "A relaxed Islamabad accent. Good for everyday Pakistani Urdu.",
+    "gender": "m",
+    "recordingStatus": "pending"
+  },
+  {
+    "id": "taha",
+    "displayName": "Taha",
+    "description": "A clear, measured pace. Great for beginners.",
+    "gender": "m",
+    "recordingStatus": "pending"
+  }
+]
