@@ -1,84 +1,164 @@
 {
-  "lessons": [
+  "chapters": [
     {
-      "id": "L01",
+      "id": "C01",
       "number": 1,
-      "title": "Greetings & First Contact",
-      "subtitle": "Hello, how are you, thank you, goodbye",
-      "estimatedMinutes": 8,
-      "contentFile": "lesson_01.json"
+      "stage": 1,
+      "title": "Greetings",
+      "subtitle": "Your first handshake with Pakistani Urdu",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_01.json",
+      "levels": [
+        { "id": "L1-1", "number": 1, "title": "First Hello", "type": "STANDARD", "xp": 10 },
+        { "id": "L1-2", "number": 2, "title": "How Are You", "type": "STANDARD", "xp": 10 },
+        { "id": "L1-3", "number": 3, "title": "Thank You", "type": "STANDARD", "xp": 10 },
+        { "id": "L1-4", "number": 4, "title": "Goodbye", "type": "STANDARD", "xp": 10 },
+        { "id": "L1-5", "number": 5, "title": "BOSS: First Meeting", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L02",
+      "id": "C02",
       "number": 2,
-      "title": "Family Introductions",
-      "subtitle": "Meet the family — parents, siblings, spouse",
-      "estimatedMinutes": 10,
-      "contentFile": "lesson_02.json"
+      "stage": 1,
+      "title": "Introducing Yourself",
+      "subtitle": "My name is, where I'm from, pleased to meet you",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_02.json",
+      "levels": [
+        { "id": "L2-1", "number": 1, "title": "My Name Is", "type": "STANDARD", "xp": 10 },
+        { "id": "L2-2", "number": 2, "title": "What's Your Name", "type": "STANDARD", "xp": 10 },
+        { "id": "L2-3", "number": 3, "title": "Where Are You From", "type": "STANDARD", "xp": 10 },
+        { "id": "L2-4", "number": 4, "title": "Pleased to Meet You", "type": "STANDARD", "xp": 10 },
+        { "id": "L2-5", "number": 5, "title": "BOSS: Meeting a Cousin", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L03",
+      "id": "C03",
       "number": 3,
-      "title": "Numbers 1–10",
-      "subtitle": "Count, tell your age, give a phone number",
-      "estimatedMinutes": 10,
-      "contentFile": "lesson_03.json"
+      "stage": 1,
+      "title": "Pronouns & 'To Be'",
+      "subtitle": "I am, you are, he is — the foundation of everything",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_03.json",
+      "levels": [
+        { "id": "L3-1", "number": 1, "title": "I, We, You", "type": "STANDARD", "xp": 10 },
+        { "id": "L3-2", "number": 2, "title": "Tum & Tu", "type": "STANDARD", "xp": 10 },
+        { "id": "L3-3", "number": 3, "title": "This & That", "type": "STANDARD", "xp": 10 },
+        { "id": "L3-4", "number": 4, "title": "He, She, They", "type": "STANDARD", "xp": 10 },
+        { "id": "L3-5", "number": 5, "title": "BOSS: Who Is Who", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L04",
+      "id": "C04",
       "number": 4,
-      "title": "Colors & Descriptions",
-      "subtitle": "Describe objects by color and size",
-      "estimatedMinutes": 10,
-      "contentFile": "lesson_04.json"
+      "stage": 1,
+      "title": "My Family",
+      "subtitle": "Parents, siblings, the Pakistani family tree",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_04.json",
+      "levels": [
+        { "id": "L4-1", "number": 1, "title": "Ammi & Abbu", "type": "STANDARD", "xp": 10 },
+        { "id": "L4-2", "number": 2, "title": "Siblings", "type": "STANDARD", "xp": 10 },
+        { "id": "L4-3", "number": 3, "title": "Extended Family", "type": "STANDARD", "xp": 10 },
+        { "id": "L4-4", "number": 4, "title": "Possessives", "type": "STANDARD", "xp": 10 },
+        { "id": "L4-5", "number": 5, "title": "BOSS: Family Portrait", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L05",
+      "id": "C05",
       "number": 5,
-      "title": "Food & Drinks",
-      "subtitle": "Order food, express preferences",
-      "estimatedMinutes": 12,
-      "contentFile": "lesson_05.json"
+      "stage": 1,
+      "title": "Numbers 1–20",
+      "subtitle": "Count, give your number, tell your age",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_05.json",
+      "levels": [
+        { "id": "L5-1", "number": 1, "title": "1 to 5", "type": "STANDARD", "xp": 10 },
+        { "id": "L5-2", "number": 2, "title": "6 to 10", "type": "STANDARD", "xp": 10 },
+        { "id": "L5-3", "number": 3, "title": "11 to 15", "type": "STANDARD", "xp": 10 },
+        { "id": "L5-4", "number": 4, "title": "16 to 20", "type": "STANDARD", "xp": 10 },
+        { "id": "L5-5", "number": 5, "title": "BOSS: Phone Number", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L06",
+      "id": "C06",
       "number": 6,
-      "title": "Daily Routines",
-      "subtitle": "Describe your day, morning and evening",
-      "estimatedMinutes": 12,
-      "contentFile": "lesson_06.json"
+      "stage": 1,
+      "title": "Colors & Objects",
+      "subtitle": "Describe what you see",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_06.json",
+      "levels": [
+        { "id": "L6-1", "number": 1, "title": "Basic Colors", "type": "STANDARD", "xp": 10 },
+        { "id": "L6-2", "number": 2, "title": "Common Objects", "type": "STANDARD", "xp": 10 },
+        { "id": "L6-3", "number": 3, "title": "Big & Small", "type": "STANDARD", "xp": 10 },
+        { "id": "L6-4", "number": 4, "title": "Descriptions", "type": "STANDARD", "xp": 10 },
+        { "id": "L6-5", "number": 5, "title": "BOSS: At the Bazaar", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L07",
+      "id": "C07",
       "number": 7,
-      "title": "Places & Directions",
-      "subtitle": "Ask where things are, give simple directions",
-      "estimatedMinutes": 12,
-      "contentFile": "lesson_07.json"
+      "stage": 1,
+      "title": "Food & Chai",
+      "subtitle": "Order, offer, and appreciate Pakistani food",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_07.json",
+      "levels": [
+        { "id": "L7-1", "number": 1, "title": "Chai & Roti", "type": "STANDARD", "xp": 10 },
+        { "id": "L7-2", "number": 2, "title": "Taste & Hunger", "type": "STANDARD", "xp": 10 },
+        { "id": "L7-3", "number": 3, "title": "At the Table", "type": "STANDARD", "xp": 10 },
+        { "id": "L7-4", "number": 4, "title": "Likes & Dislikes", "type": "STANDARD", "xp": 10 },
+        { "id": "L7-5", "number": 5, "title": "BOSS: Ammi's Kitchen", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L08",
+      "id": "C08",
       "number": 8,
-      "title": "Shopping & Prices",
-      "subtitle": "Buy things, ask the price, haggle",
-      "estimatedMinutes": 12,
-      "contentFile": "lesson_08.json"
+      "stage": 1,
+      "title": "Where & How Far",
+      "subtitle": "Ask for directions, name common places",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_08.json",
+      "levels": [
+        { "id": "L8-1", "number": 1, "title": "Where Is", "type": "STANDARD", "xp": 10 },
+        { "id": "L8-2", "number": 2, "title": "Near & Far", "type": "STANDARD", "xp": 10 },
+        { "id": "L8-3", "number": 3, "title": "Left & Right", "type": "STANDARD", "xp": 10 },
+        { "id": "L8-4", "number": 4, "title": "Common Places", "type": "STANDARD", "xp": 10 },
+        { "id": "L8-5", "number": 5, "title": "BOSS: Getting to the Masjid", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L09",
+      "id": "C09",
       "number": 9,
-      "title": "Time & Weather",
-      "subtitle": "Tell time, describe the weather",
-      "estimatedMinutes": 12,
-      "contentFile": "lesson_09.json"
+      "stage": 1,
+      "title": "Politeness & Requests",
+      "subtitle": "Please, sorry, excuse me, can you help me",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_09.json",
+      "levels": [
+        { "id": "L9-1", "number": 1, "title": "Please & Sorry", "type": "STANDARD", "xp": 10 },
+        { "id": "L9-2", "number": 2, "title": "Excuse Me", "type": "STANDARD", "xp": 10 },
+        { "id": "L9-3", "number": 3, "title": "Can You Help Me", "type": "STANDARD", "xp": 10 },
+        { "id": "L9-4", "number": 4, "title": "I Don't Understand", "type": "STANDARD", "xp": 10 },
+        { "id": "L9-5", "number": 5, "title": "BOSS: Lost in Lahore", "type": "BOSS", "xp": 75 }
+      ]
     },
     {
-      "id": "L10",
+      "id": "C10",
       "number": 10,
-      "title": "Requests & Polite Forms",
-      "subtitle": "Please, sorry, excuse me, can you help me?",
-      "estimatedMinutes": 12,
-      "contentFile": "lesson_10.json"
+      "stage": 1,
+      "title": "Time & Days",
+      "subtitle": "Today, yesterday, what time, days of the week",
+      "estimatedMinutes": 14,
+      "contentFile": "chapter_10.json",
+      "levels": [
+        { "id": "L10-1", "number": 1, "title": "Today & Tomorrow", "type": "STANDARD", "xp": 10 },
+        { "id": "L10-2", "number": 2, "title": "Days of the Week", "type": "STANDARD", "xp": 10 },
+        { "id": "L10-3", "number": 3, "title": "What Time Is It", "type": "STANDARD", "xp": 10 },
+        { "id": "L10-4", "number": 4, "title": "Morning & Evening", "type": "STANDARD", "xp": 10 },
+        { "id": "L10-5", "number": 5, "title": "BOSS: Planning a Visit", "type": "BOSS", "xp": 75 }
+      ]
     }
   ]
 }

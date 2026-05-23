@@ -21,11 +21,10 @@ const queryClient = new QueryClient();
 
 function RootLayoutNav() {
   return (
-    <Stack screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
+    <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="lesson/[id]" options={{ headerShown: false }} />
-      <Stack.Screen name="lesson/exercise" options={{ headerShown: false, gestureEnabled: false }} />
-      <Stack.Screen name="lesson/result" options={{ headerShown: false, gestureEnabled: false }} />
+      <Stack.Screen name="level/[levelId]" options={{ headerShown: false, gestureEnabled: false }} />
+      <Stack.Screen name="level/result" options={{ headerShown: false, gestureEnabled: false }} />
       <Stack.Screen name="settings" options={{ headerShown: false }} />
     </Stack>
   );

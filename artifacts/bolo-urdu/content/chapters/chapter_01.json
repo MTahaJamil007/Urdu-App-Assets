@@ -1,0 +1,322 @@
+{
+  "id": "C01",
+  "number": 1,
+  "title": "Greetings",
+  "subtitle": "Your first handshake with Pakistani Urdu",
+  "goal": "Greet a Pakistani person properly, ask how they are, respond, thank them, and say goodbye.",
+  "estimatedMinutes": 14,
+  "culturalNote": "Greetings in Pakistan carry warmth and respect. The exchange of Assalam alaikum and Wa alaikum assalam is woven into daily life — used by shopkeepers, taxi drivers, and strangers alike. Knowing how to greet someone properly is the single most important skill in Pakistani social life.",
+  "passingScore": 0.75,
+  "rewards": {
+    "xp": 50,
+    "completionMessage": "Aap ne pehla baab pura kiya! You completed your first chapter. You can now greet, ask how someone is, thank, and say goodbye in Pakistani Urdu."
+  },
+
+  "phrases": [
+    {
+      "id": "C01-001",
+      "chapterId": "C01",
+      "levelId": "L1-1",
+      "order": 1,
+      "urdu": "السلام علیکم",
+      "roman": "Assalam alaikum",
+      "english": "Hello (Peace be upon you)",
+      "englishContextual": "Hello",
+      "gender": "neutral",
+      "category": "greeting",
+      "audio": { "normal": "audio/C01/C01-001-normal.m4a", "slow": "audio/C01/C01-001-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "The standard Pakistani greeting. Universal across all of Pakistan."
+    },
+    {
+      "id": "C01-002",
+      "chapterId": "C01",
+      "levelId": "L1-1",
+      "order": 2,
+      "urdu": "وعلیکم السلام",
+      "roman": "Wa alaikum assalam",
+      "english": "Hello back (And peace be upon you)",
+      "englishContextual": "Hello (the reply)",
+      "gender": "neutral",
+      "category": "greeting",
+      "audio": { "normal": "audio/C01/C01-002-normal.m4a", "slow": "audio/C01/C01-002-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Always reply when someone says Assalam alaikum to you. Not replying is considered rude."
+    },
+    {
+      "id": "C01-003",
+      "chapterId": "C01",
+      "levelId": "L1-2",
+      "order": 3,
+      "urdu": "آپ کیسے ہیں؟",
+      "roman": "Aap kaise hain?",
+      "english": "How are you? (to a male)",
+      "englishContextual": "How are you? (asking a male)",
+      "gender": "m",
+      "category": "greeting",
+      "audio": { "normal": "audio/C01/C01-003-normal.m4a", "slow": "audio/C01/C01-003-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Kaise is the masculine form. Aap is the respectful you — safe for anyone you don't know intimately."
+    },
+    {
+      "id": "C01-004",
+      "chapterId": "C01",
+      "levelId": "L1-2",
+      "order": 4,
+      "urdu": "آپ کیسی ہیں؟",
+      "roman": "Aap kaisi hain?",
+      "english": "How are you? (to a female)",
+      "englishContextual": "How are you? (asking a female)",
+      "gender": "f",
+      "category": "greeting",
+      "audio": { "normal": "audio/C01/C01-004-normal.m4a", "slow": "audio/C01/C01-004-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Note: kaisi (with -i) not kaise. First taste of gender agreement."
+    },
+    {
+      "id": "C01-005",
+      "chapterId": "C01",
+      "levelId": "L1-2",
+      "order": 5,
+      "urdu": "میں ٹھیک ہوں",
+      "roman": "Main theek hoon",
+      "english": "I am fine",
+      "englishContextual": "I'm fine (the standard reply)",
+      "gender": "neutral",
+      "category": "response",
+      "audio": { "normal": "audio/C01/C01-005-normal.m4a", "slow": "audio/C01/C01-005-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Theek is gender-neutral — safe to say regardless of your gender."
+    },
+    {
+      "id": "C01-006",
+      "chapterId": "C01",
+      "levelId": "L1-3",
+      "order": 6,
+      "urdu": "شکریہ",
+      "roman": "Shukriya",
+      "english": "Thank you",
+      "englishContextual": "Thank you",
+      "gender": "neutral",
+      "category": "courtesy",
+      "audio": { "normal": "audio/C01/C01-006-normal.m4a", "slow": "audio/C01/C01-006-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Universal thanks in Pakistani Urdu."
+    },
+    {
+      "id": "C01-007",
+      "chapterId": "C01",
+      "levelId": "L1-3",
+      "order": 7,
+      "urdu": "آپ کا شکریہ",
+      "roman": "Aap ka shukriya",
+      "english": "Thank you (warmer/more formal)",
+      "englishContextual": "Thank you (with warmth and respect)",
+      "gender": "neutral",
+      "category": "courtesy",
+      "audio": { "normal": "audio/C01/C01-007-normal.m4a", "slow": "audio/C01/C01-007-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT"],
+      "notes": "Warmer than just shukriya. Use when you genuinely want to express gratitude."
+    },
+    {
+      "id": "C01-008",
+      "chapterId": "C01",
+      "levelId": "L1-4",
+      "order": 8,
+      "urdu": "خدا حافظ",
+      "roman": "Khuda hafiz",
+      "english": "Goodbye (May God protect you)",
+      "englishContextual": "Goodbye",
+      "gender": "neutral",
+      "category": "farewell",
+      "audio": { "normal": "audio/C01/C01-008-normal.m4a", "slow": "audio/C01/C01-008-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Older generations often prefer Khuda hafiz. Universal in Pakistan."
+    },
+    {
+      "id": "C01-009",
+      "chapterId": "C01",
+      "levelId": "L1-4",
+      "order": 9,
+      "urdu": "اللہ حافظ",
+      "roman": "Allah hafiz",
+      "english": "Goodbye (May Allah protect you)",
+      "englishContextual": "Goodbye (alternative form)",
+      "gender": "neutral",
+      "category": "farewell",
+      "audio": { "normal": "audio/C01/C01-009-normal.m4a", "slow": "audio/C01/C01-009-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT", "SPEAK"],
+      "notes": "Younger generations often prefer Allah hafiz. Equally Pakistani — use whichever feels natural."
+    },
+    {
+      "id": "C01-010",
+      "chapterId": "C01",
+      "levelId": "L1-4",
+      "order": 10,
+      "urdu": "پھر ملیں گے",
+      "roman": "Phir milenge",
+      "english": "See you later (we will meet again)",
+      "englishContextual": "See you later",
+      "gender": "neutral",
+      "category": "farewell",
+      "audio": { "normal": "audio/C01/C01-010-normal.m4a", "slow": "audio/C01/C01-010-slow.m4a" },
+      "image": null,
+      "exerciseTypes": ["L_TO_M", "LISTEN_REPEAT"],
+      "notes": "Casual goodbye. Often paired with khuda hafiz or allah hafiz."
+    }
+  ],
+
+  "levels": [
+    {
+      "id": "L1-1",
+      "chapterId": "C01",
+      "number": 1,
+      "title": "First Hello",
+      "subtitle": "Assalam alaikum and the reply",
+      "type": "STANDARD",
+      "estimatedMinutes": 2,
+      "newPhraseIds": ["C01-001", "C01-002"],
+      "reviewPhraseIds": [],
+      "exerciseSequence": [
+        { "id": "L1-1-E1", "type": "INTRODUCE", "phraseId": "C01-001" },
+        { "id": "L1-1-E2", "type": "L_TO_M", "phraseId": "C01-001", "distractorPhraseIds": ["C01-006", "C01-008"], "prompt": "What does this mean?" },
+        { "id": "L1-1-E3", "type": "LISTEN_REPEAT", "phraseId": "C01-001" },
+        { "id": "L1-1-E4", "type": "INTRODUCE", "phraseId": "C01-002" },
+        { "id": "L1-1-E5", "type": "L_TO_M", "phraseId": "C01-002", "distractorPhraseIds": ["C01-001", "C01-010"], "prompt": "What does this mean? Listen carefully — this is the REPLY.", "hint": "Listen for the difference from Assalam alaikum." },
+        { "id": "L1-1-E6", "type": "LISTEN_REPEAT", "phraseId": "C01-002" },
+        { "id": "L1-1-E7", "type": "SPEAK", "phraseId": "C01-002", "prompt": "Someone greets you with 'Assalam alaikum'. Reply correctly.", "hint": "Wa alaikum assalam" }
+      ],
+      "rewards": { "xp": 10 }
+    },
+
+    {
+      "id": "L1-2",
+      "chapterId": "C01",
+      "number": 2,
+      "title": "How Are You",
+      "subtitle": "Aap kaise hain + the reply",
+      "type": "STANDARD",
+      "estimatedMinutes": 3,
+      "newPhraseIds": ["C01-003", "C01-004", "C01-005"],
+      "reviewPhraseIds": ["C01-001", "C01-002"],
+      "exerciseSequence": [
+        { "id": "L1-2-E1", "type": "INTRODUCE", "phraseId": "C01-003" },
+        { "id": "L1-2-E2", "type": "INTRODUCE", "phraseId": "C01-004" },
+        { "id": "L1-2-E3", "type": "L_TO_M", "phraseId": "C01-003", "distractorPhraseIds": ["C01-004", "C01-005"], "prompt": "What does this mean? Pay attention to who is being asked.", "hint": "Listen for kaise vs kaisi." },
+        { "id": "L1-2-E4", "type": "L_TO_M", "phraseId": "C01-004", "distractorPhraseIds": ["C01-003", "C01-005"], "prompt": "What does this mean? Pay attention to who is being asked." },
+        { "id": "L1-2-E5", "type": "LISTEN_REPEAT", "phraseId": "C01-003" },
+        { "id": "L1-2-E6", "type": "LISTEN_REPEAT", "phraseId": "C01-004" },
+        { "id": "L1-2-E7", "type": "INTRODUCE", "phraseId": "C01-005" },
+        { "id": "L1-2-E8", "type": "L_TO_M", "phraseId": "C01-005", "distractorPhraseIds": ["C01-001", "C01-006"], "prompt": "What does this mean?" },
+        { "id": "L1-2-E9", "type": "LISTEN_REPEAT", "phraseId": "C01-005" },
+        { "id": "L1-2-E10", "type": "SPEAK", "phraseId": "C01-005", "prompt": "Someone asks how you are. Say 'I am fine'.", "hint": "Main theek hoon" }
+      ],
+      "rewards": { "xp": 10 }
+    },
+
+    {
+      "id": "L1-3",
+      "chapterId": "C01",
+      "number": 3,
+      "title": "Thank You",
+      "subtitle": "Shukriya and Aap ka shukriya",
+      "type": "STANDARD",
+      "estimatedMinutes": 2,
+      "newPhraseIds": ["C01-006", "C01-007"],
+      "reviewPhraseIds": ["C01-005"],
+      "exerciseSequence": [
+        { "id": "L1-3-E1", "type": "INTRODUCE", "phraseId": "C01-006" },
+        { "id": "L1-3-E2", "type": "L_TO_M", "phraseId": "C01-006", "distractorPhraseIds": ["C01-001", "C01-008"], "prompt": "What does this mean?" },
+        { "id": "L1-3-E3", "type": "LISTEN_REPEAT", "phraseId": "C01-006" },
+        { "id": "L1-3-E4", "type": "SPEAK", "phraseId": "C01-006", "prompt": "Someone hands you a cup of chai. Thank them.", "hint": "Shukriya" },
+        { "id": "L1-3-E5", "type": "INTRODUCE", "phraseId": "C01-007" },
+        { "id": "L1-3-E6", "type": "L_TO_M", "phraseId": "C01-007", "distractorPhraseIds": ["C01-006", "C01-005"], "prompt": "What does this mean?" },
+        { "id": "L1-3-E7", "type": "LISTEN_REPEAT", "phraseId": "C01-007" }
+      ],
+      "rewards": { "xp": 10 }
+    },
+
+    {
+      "id": "L1-4",
+      "chapterId": "C01",
+      "number": 4,
+      "title": "Goodbye",
+      "subtitle": "Khuda hafiz, Allah hafiz, and phir milenge",
+      "type": "STANDARD",
+      "estimatedMinutes": 2,
+      "newPhraseIds": ["C01-008", "C01-009", "C01-010"],
+      "reviewPhraseIds": ["C01-006"],
+      "exerciseSequence": [
+        { "id": "L1-4-E1", "type": "INTRODUCE", "phraseId": "C01-008" },
+        { "id": "L1-4-E2", "type": "INTRODUCE", "phraseId": "C01-009" },
+        { "id": "L1-4-E3", "type": "L_TO_M", "phraseId": "C01-008", "distractorPhraseIds": ["C01-009", "C01-010"], "prompt": "What does this mean?", "hint": "Both Khuda hafiz and Allah hafiz mean goodbye." },
+        { "id": "L1-4-E4", "type": "L_TO_M", "phraseId": "C01-009", "distractorPhraseIds": ["C01-008", "C01-001"], "prompt": "What does this mean?" },
+        { "id": "L1-4-E5", "type": "LISTEN_REPEAT", "phraseId": "C01-008" },
+        { "id": "L1-4-E6", "type": "LISTEN_REPEAT", "phraseId": "C01-009" },
+        { "id": "L1-4-E7", "type": "INTRODUCE", "phraseId": "C01-010" },
+        { "id": "L1-4-E8", "type": "L_TO_M", "phraseId": "C01-010", "distractorPhraseIds": ["C01-008", "C01-006"], "prompt": "What does this mean?" },
+        { "id": "L1-4-E9", "type": "LISTEN_REPEAT", "phraseId": "C01-010" },
+        { "id": "L1-4-E10", "type": "SPEAK", "phraseId": "C01-008", "prompt": "Say goodbye to your host.", "hint": "Either Khuda hafiz or Allah hafiz works." }
+      ],
+      "rewards": { "xp": 10 }
+    },
+
+    {
+      "id": "L1-5",
+      "chapterId": "C01",
+      "number": 5,
+      "title": "BOSS: First Meeting",
+      "subtitle": "A Pakistani neighbor visits",
+      "type": "BOSS",
+      "estimatedMinutes": 5,
+      "newPhraseIds": [],
+      "reviewPhraseIds": ["C01-001", "C01-002", "C01-003", "C01-004", "C01-005", "C01-006", "C01-007", "C01-008", "C01-009"],
+      "scenarioIntro": "Your new Pakistani neighbor has knocked on your door for the first time. Greet them properly and have a brief conversation. Take a breath — you know all the words.",
+      "exerciseSequence": [
+        {
+          "id": "L1-5-E1",
+          "type": "SCENARIO_TURN",
+          "speakerLine": { "audio": "audio/C01/scenario/turn1.m4a", "urdu": "السلام علیکم", "roman": "Assalam alaikum", "english": "Hello (Peace be upon you)" },
+          "expectedPhraseId": "C01-002",
+          "prompt": "Your neighbor has greeted you. Reply.",
+          "hint": null
+        },
+        {
+          "id": "L1-5-E2",
+          "type": "SCENARIO_TURN",
+          "speakerLine": { "audio": "audio/C01/scenario/turn2.m4a", "urdu": "آپ کیسے ہیں؟", "roman": "Aap kaise hain?", "english": "How are you?" },
+          "expectedPhraseId": "C01-005",
+          "prompt": "They're asking how you are. Say you're fine.",
+          "hint": null
+        },
+        {
+          "id": "L1-5-E3",
+          "type": "SCENARIO_TURN",
+          "speakerLine": { "audio": "audio/C01/scenario/turn3.m4a", "urdu": "یہ آپ کے لیے", "roman": "Yeh aap ke liye", "english": "This is for you (offering a sweet)" },
+          "expectedPhraseId": "C01-007",
+          "prompt": "Your neighbor brought you a sweet. Thank them warmly.",
+          "hint": "Aap ka shukriya — the warmer thank you."
+        },
+        {
+          "id": "L1-5-E4",
+          "type": "SCENARIO_TURN",
+          "speakerLine": { "audio": "audio/C01/scenario/turn4.m4a", "urdu": "اچھا، پھر ملیں گے", "roman": "Acha, phir milenge", "english": "Okay, see you later" },
+          "expectedPhraseId": "C01-008",
+          "prompt": "They're leaving. Say goodbye.",
+          "hint": "Either Khuda hafiz or Allah hafiz works."
+        }
+      ],
+      "passingScore": 0.75,
+      "rewards": { "xp": 25, "chapterCompleteBonus": 50 }
+    }
+  ]
+}

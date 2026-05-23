@@ -3,15 +3,17 @@ import { ExerciseType } from './phrase';
 export interface BaseExercise {
   id: string;
   type: ExerciseType;
-  phraseId: string;
+  phraseId?: string;
 }
 
 export interface IntroduceExercise extends BaseExercise {
   type: 'INTRODUCE';
+  phraseId: string;
 }
 
 export interface ListenToMeaningExercise extends BaseExercise {
   type: 'L_TO_M';
+  phraseId: string;
   distractorPhraseIds: string[];
   prompt: string;
   hint?: string;
@@ -19,6 +21,7 @@ export interface ListenToMeaningExercise extends BaseExercise {
 
 export interface ListenToImageExercise extends BaseExercise {
   type: 'L_TO_I';
+  phraseId: string;
   distractorPhraseIds: string[];
   prompt: string;
   hint?: string;
@@ -26,12 +29,27 @@ export interface ListenToImageExercise extends BaseExercise {
 
 export interface ListenRepeatExercise extends BaseExercise {
   type: 'LISTEN_REPEAT';
+  phraseId: string;
 }
 
 export interface SpeakExercise extends BaseExercise {
   type: 'SPEAK';
+  phraseId: string;
   prompt: string;
   hint?: string | null;
+}
+
+export interface ScenarioTurnExercise extends BaseExercise {
+  type: 'SCENARIO_TURN';
+  speakerLine: {
+    audio: string;
+    urdu: string;
+    roman: string;
+    english: string;
+  };
+  expectedPhraseId: string;
+  prompt: string;
+  hint: string | null;
 }
 
 export type Exercise =
@@ -39,7 +57,8 @@ export type Exercise =
   | ListenToMeaningExercise
   | ListenToImageExercise
   | ListenRepeatExercise
-  | SpeakExercise;
+  | SpeakExercise
+  | ScenarioTurnExercise;
 
 export interface ExerciseResult {
   exerciseId: string;

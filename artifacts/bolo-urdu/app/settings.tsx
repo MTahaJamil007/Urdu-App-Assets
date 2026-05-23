@@ -20,18 +20,16 @@ export default function SettingsScreen() {
   const colors = useColors();
   const insets = useSafeAreaInsets();
   const topPad = Platform.OS === 'web' ? 67 : insets.top;
-  const { userName, setUserName, preferences, setPreference, totalXP, currentStreak, reset } =
+  const { userName, setUserName, preferences, setPreference, totalXP, currentStreak, chaptersCompleted, reset } =
     useProgressStore();
   const [nameInput, setNameInput] = useState(userName ?? '');
 
-  const handleSaveName = () => {
-    setUserName(nameInput.trim());
-  };
+  const handleSaveName = () => setUserName(nameInput.trim());
 
   const handleReset = () => {
     Alert.alert(
       'Reset Progress',
-      'This will erase ALL your progress including XP, streaks, and completed lessons. Are you sure?',
+      'This will erase ALL your progress — XP, streak, and level completions. Are you sure?',
       [
         { text: 'Cancel', style: 'cancel' },
         {
@@ -46,11 +44,12 @@ export default function SettingsScreen() {
     );
   };
 
+  const chaptersCount = chaptersCompleted.length;
+
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
-      {/* Header */}
       <View style={[styles.header, { paddingTop: topPad + 8 }]}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={24} color={colors.foreground} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { color: colors.foreground }]}>Settings</Text>
@@ -58,37 +57,40 @@ export default function SettingsScreen() {
 
       <ScrollView
         style={styles.scroll}
-        contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 32 }]}
+        contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + 32 }]}
         showsVerticalScrollIndicator={false}
       >
         {/* Stats */}
         <View style={[styles.statsCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
-          <View style={styles.statRow}>
-            <Ionicons name="star" size={20} color="#D97706" />
-            <Text style={[styles.statLabel, { color: colors.foreground }]}>Total XP</Text>
-            <Text style={[styles.statValue, { color: colors.foreground }]}>{totalXP}</Text>
-          </View>
-          <View style={[styles.divider, { backgroundColor: colors.border }]} />
-          <View style={styles.statRow}>
-            <Ionicons name="flame" size={20} color="#D97706" />
-            <Text style={[styles.statLabel, { color: colors.foreground }]}>Current Streak</Text>
-            <Text style={[styles.statValue, { color: colors.foreground }]}>{currentStreak} days</Text>
-          </View>
+          {[
+            { icon: 'star' as const, color: '#D97706', label: 'Total XP', value: String(totalXP) },
+            { icon: 'flame' as const, color: '#D97706', label: 'Streak', value: `${currentStreak} days` },
+            { icon: 'library' as const, color: colors.primary, label: 'Chapters done', value: String(chaptersCount) },
+          ].map(({ icon, color, label, value }, i) => (
+            <View key={label}>
+              {i > 0 && <View style={[styles.divider, { backgroundColor: colors.border }]} />}
+              <View style={styles.statRow}>
+                <Ionicons name={icon} size={20} color={color} />
+                <Text style={[styles.statLabel, { color: colors.foreground }]}>{label}</Text>
+                <Text style={[styles.statValue, { color: colors.foreground }]}>{value}</Text>
+              </View>
+            </View>
+          ))}
         </View>
 
         {/* Name */}
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.foreground }]}>Profile</Text>
-          <View style={[styles.inputRow, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          <View style={[styles.inputWrapper, { backgroundColor: colors.card, borderColor: colors.border }]}>
             <TextInput
               value={nameInput}
               onChangeText={setNameInput}
               onBlur={handleSaveName}
+              onSubmitEditing={handleSaveName}
               placeholder="Your name"
               placeholderTextColor={colors.mutedForeground}
               style={[styles.nameInput, { color: colors.foreground }]}
               returnKeyType="done"
-              onSubmitEditing={handleSaveName}
             />
           </View>
         </View>
@@ -97,7 +99,7 @@ export default function SettingsScreen() {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.foreground }]}>Pronoun preference</Text>
           <Text style={[styles.sectionDesc, { color: colors.mutedForeground }]}>
-            Urdu verbs change form based on the speaker's gender.
+            Urdu verb forms change based on the speaker's gender.
           </Text>
           <View style={styles.genderRow}>
             {(['m', 'f', 'na'] as const).map((g) => (
@@ -105,21 +107,14 @@ export default function SettingsScreen() {
                 key={g}
                 onPress={() => setPreference('gender', g)}
                 style={[
-                  styles.genderButton,
+                  styles.genderBtn,
                   {
-                    backgroundColor:
-                      preferences.gender === g ? colors.primary : colors.muted,
-                    borderColor:
-                      preferences.gender === g ? colors.primary : colors.border,
+                    backgroundColor: preferences.gender === g ? colors.primary : colors.muted,
+                    borderColor: preferences.gender === g ? colors.primary : colors.border,
                   },
                 ]}
               >
-                <Text
-                  style={[
-                    styles.genderButtonText,
-                    { color: preferences.gender === g ? '#fff' : colors.foreground },
-                  ]}
-                >
+                <Text style={[styles.genderBtnText, { color: preferences.gender === g ? '#fff' : colors.foreground }]}>
                   {g === 'm' ? 'Male' : g === 'f' ? 'Female' : 'Neutral'}
                 </Text>
               </TouchableOpacity>
@@ -131,10 +126,10 @@ export default function SettingsScreen() {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.foreground }]}>Preferences</Text>
           {[
-            { key: 'hintsEnabled' as const, label: 'Hints enabled', desc: 'Show hints during exercises' },
-            { key: 'audioAutoplay' as const, label: 'Audio autoplay', desc: 'Auto-play phrase audio when exercise loads' },
-            { key: 'reduceMotion' as const, label: 'Reduce motion', desc: 'Disable animations for accessibility' },
-          ].map(({ key, label, desc }) => (
+            { key: 'hintsEnabled' as const, label: 'Hints', desc: 'Show hints during exercises' },
+            { key: 'audioAutoplay' as const, label: 'Auto-play audio', desc: 'Play audio when exercise loads' },
+            { key: 'reduceMotion' as const, label: 'Reduce motion', desc: 'Disable animations' },
+          ].map(({ key, label, desc }, i) => (
             <View
               key={key}
               style={[styles.prefRow, { backgroundColor: colors.card, borderColor: colors.border }]}
@@ -153,15 +148,15 @@ export default function SettingsScreen() {
           ))}
         </View>
 
-        {/* Danger Zone */}
+        {/* Reset */}
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.destructive }]}>Danger zone</Text>
           <TouchableOpacity
             onPress={handleReset}
-            style={[styles.resetButton, { backgroundColor: '#FEF2F2', borderColor: '#FECACA' }]}
+            style={[styles.resetBtn, { backgroundColor: '#FEF2F2', borderColor: '#FECACA' }]}
           >
             <Ionicons name="trash-outline" size={20} color={colors.destructive} />
-            <Text style={[styles.resetButtonText, { color: colors.destructive }]}>Reset all progress</Text>
+            <Text style={[styles.resetBtnText, { color: colors.destructive }]}>Reset all progress</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -178,43 +173,23 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     gap: 12,
   },
-  backButton: { padding: 4 },
+  backBtn: { padding: 4 },
   headerTitle: { fontSize: 22, fontFamily: 'Inter_700Bold' },
   scroll: { flex: 1 },
-  scrollContent: { paddingHorizontal: 20, paddingTop: 8, gap: 24 },
-  statsCard: {
-    borderRadius: 14,
-    borderWidth: 1,
-    padding: 16,
-    gap: 12,
-  },
+  content: { paddingHorizontal: 20, paddingTop: 8, gap: 24 },
+  statsCard: { borderRadius: 14, borderWidth: 1, padding: 16, gap: 12 },
   statRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   statLabel: { flex: 1, fontSize: 15, fontFamily: 'Inter_500Medium' },
   statValue: { fontSize: 15, fontFamily: 'Inter_700Bold' },
-  divider: { height: StyleSheet.hairlineWidth },
+  divider: { height: StyleSheet.hairlineWidth, marginVertical: 2 },
   section: { gap: 12 },
   sectionTitle: { fontSize: 17, fontFamily: 'Inter_600SemiBold' },
   sectionDesc: { fontSize: 14, fontFamily: 'Inter_400Regular', lineHeight: 20, marginTop: -4 },
-  inputRow: {
-    borderRadius: 12,
-    borderWidth: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 4,
-  },
-  nameInput: {
-    fontSize: 16,
-    fontFamily: 'Inter_400Regular',
-    paddingVertical: 12,
-  },
+  inputWrapper: { borderRadius: 12, borderWidth: 1, paddingHorizontal: 16 },
+  nameInput: { fontSize: 16, fontFamily: 'Inter_400Regular', paddingVertical: 14 },
   genderRow: { flexDirection: 'row', gap: 10 },
-  genderButton: {
-    flex: 1,
-    paddingVertical: 12,
-    borderRadius: 12,
-    borderWidth: 1,
-    alignItems: 'center',
-  },
-  genderButtonText: { fontSize: 14, fontFamily: 'Inter_600SemiBold' },
+  genderBtn: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, alignItems: 'center' },
+  genderBtnText: { fontSize: 14, fontFamily: 'Inter_600SemiBold' },
   prefRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -226,7 +201,7 @@ const styles = StyleSheet.create({
   prefInfo: { flex: 1, gap: 2 },
   prefLabel: { fontSize: 15, fontFamily: 'Inter_500Medium' },
   prefDesc: { fontSize: 13, fontFamily: 'Inter_400Regular' },
-  resetButton: {
+  resetBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
@@ -234,5 +209,5 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
   },
-  resetButtonText: { fontSize: 15, fontFamily: 'Inter_600SemiBold' },
+  resetBtnText: { fontSize: 15, fontFamily: 'Inter_600SemiBold' },
 });

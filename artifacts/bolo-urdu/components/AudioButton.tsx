@@ -62,7 +62,7 @@ export function AudioButton({ phrase, speed = 'normal', size = 'large' }: AudioB
           <ActivityIndicator color={iconColor} size="small" />
         ) : (
           <Ionicons
-            name={speed === 'slow' ? 'turtle-outline' : 'volume-high'}
+            name={speed === 'slow' ? 'hourglass-outline' : 'volume-high'}
             size={iconSize}
             color={iconColor}
           />

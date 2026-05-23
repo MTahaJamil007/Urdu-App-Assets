@@ -19,7 +19,8 @@ export type ExerciseType =
   | 'L_TO_I'
   | 'L_TO_M'
   | 'LISTEN_REPEAT'
-  | 'SPEAK';
+  | 'SPEAK'
+  | 'SCENARIO_TURN';
 
 export interface AudioAssets {
   normal: string;
@@ -28,7 +29,8 @@ export interface AudioAssets {
 
 export interface Phrase {
   id: string;
-  lessonId: string;
+  chapterId: string;
+  levelId: string;
   order: number;
   urdu: string;
   roman: string;

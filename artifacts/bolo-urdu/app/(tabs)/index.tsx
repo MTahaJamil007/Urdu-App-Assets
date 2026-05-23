@@ -1,9 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  FlatList,
   Modal,
   Platform,
   ScrollView,
@@ -14,111 +13,49 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PathView } from '@/components/PathView';
 import { StreakBadge } from '@/components/StreakBadge';
 import { XPCounter } from '@/components/XPCounter';
 import { contentService } from '@/services/contentService';
 import { useProgressStore } from '@/stores/useProgressStore';
 import { useUserStore } from '@/stores/useUserStore';
-import { LessonManifestEntry } from '@/types/lesson';
+import { ChapterManifestEntry } from '@/types/chapter';
 import { useColors } from '@/hooks/useColors';
-
-function LessonRow({
-  lesson,
-  isUnlocked,
-  isCompleted,
-  bestScore,
-  isCurrent,
-  onPress,
-}: {
-  lesson: LessonManifestEntry;
-  isUnlocked: boolean;
-  isCompleted: boolean;
-  bestScore: number;
-  isCurrent: boolean;
-  onPress: () => void;
-}) {
-  const colors = useColors();
-
-  let statusIcon: React.ComponentProps<typeof Ionicons>['name'] = 'lock-closed';
-  let statusColor = colors.mutedForeground;
-  if (isCompleted) {
-    statusIcon = 'checkmark-circle';
-    statusColor = '#16A34A';
-  } else if (isUnlocked) {
-    statusIcon = 'play-circle';
-    statusColor = colors.primary;
-  }
-
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      disabled={!isUnlocked}
-      activeOpacity={0.85}
-      style={[
-        styles.lessonRow,
-        {
-          backgroundColor: isCurrent ? `${colors.primary}12` : colors.card,
-          borderColor: isCurrent ? colors.primary : colors.border,
-          opacity: isUnlocked ? 1 : 0.5,
-        },
-      ]}
-    >
-      <View style={[styles.lessonNum, { backgroundColor: isUnlocked ? colors.primary : colors.muted }]}>
-        <Text style={[styles.lessonNumText, { color: isUnlocked ? '#fff' : colors.mutedForeground }]}>
-          {lesson.number}
-        </Text>
-      </View>
-
-      <View style={styles.lessonInfo}>
-        <Text style={[styles.lessonTitle, { color: isUnlocked ? colors.foreground : colors.mutedForeground }]}>
-          {lesson.title}
-        </Text>
-        <Text style={[styles.lessonSubtitle, { color: colors.mutedForeground }]}>
-          {lesson.subtitle}
-        </Text>
-        {isCompleted && bestScore > 0 && (
-          <Text style={[styles.lessonScore, { color: '#16A34A' }]}>
-            Best: {Math.round(bestScore * 100)}%
-          </Text>
-        )}
-      </View>
-
-      <View style={styles.lessonMeta}>
-        <Ionicons name={statusIcon} size={24} color={statusColor} />
-        <Text style={[styles.lessonTime, { color: colors.mutedForeground }]}>
-          {lesson.estimatedMinutes}m
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
-}
 
 export default function HomeScreen() {
   const colors = useColors();
   const insets = useSafeAreaInsets();
-  const { currentStreak, totalXP, userName, setUserName, isLessonUnlocked, getLessonProgress, lessonsCompleted, preferences } = useProgressStore();
+  const topPad = Platform.OS === 'web' ? 67 : insets.top;
+  const scrollRef = useRef<ScrollView>(null);
+
+  const { currentStreak, totalXP, userName, setUserName, getCurrentLevel, preferences } = useProgressStore();
   const { hasCompletedOnboarding, completeOnboarding } = useUserStore();
-  const [manifest, setManifest] = useState<LessonManifestEntry[]>([]);
+
+  const [chapters, setChapters] = useState<ChapterManifestEntry[]>([]);
   const [nameInput, setNameInput] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(!hasCompletedOnboarding);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    const m = contentService.loadManifest();
-    setManifest(m.lessons);
+    const manifest = contentService.loadManifest();
+    setChapters(manifest.chapters);
   }, []);
 
-  const currentLesson = manifest.find((l) => {
-    const prog = getLessonProgress(l.id);
-    return prog?.startedAt && !prog?.completedAt;
-  });
+  const currentLevel = getCurrentLevel();
 
-  const handleLessonPress = (lesson: LessonManifestEntry) => {
-    if (!isLessonUnlocked(lesson.id)) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-      return;
-    }
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 2000);
+  };
+
+  const handleLevelPress = (levelId: string, chapterId: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    router.push(`/lesson/${lesson.id}`);
+    router.push(`/level/${levelId}`);
+  };
+
+  const handleLevelLocked = () => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+    showToast('Complete the previous level first');
   };
 
   const handleOnboardingDone = () => {
@@ -127,8 +64,9 @@ export default function HomeScreen() {
     setShowOnboarding(false);
   };
 
-  const greeting = userName ? `Assalam alaikum, ${userName}!` : 'Assalam alaikum!';
-  const topPad = Platform.OS === 'web' ? 67 : insets.top;
+  const greeting = userName
+    ? `Assalam alaikum, ${userName}!`
+    : 'Assalam alaikum!';
 
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
@@ -136,244 +74,173 @@ export default function HomeScreen() {
       <Modal visible={showOnboarding} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={[styles.modalCard, { backgroundColor: colors.card }]}>
-            <Text style={[styles.modalTitle, { color: colors.foreground }]}>Welcome to Bolo Urdu</Text>
+            <View style={[styles.modalIconRow, { backgroundColor: `${colors.primary}18` }]}>
+              <Text style={styles.modalEmoji}>🇵🇰</Text>
+            </View>
+            <Text style={[styles.modalTitle, { color: colors.foreground }]}>
+              Welcome to Bolo
+            </Text>
             <Text style={[styles.modalSubtitle, { color: colors.mutedForeground }]}>
-              Learn spoken Urdu through listening and speaking. What's your name?
+              Learn to speak Pakistani Urdu. What's your name?
             </Text>
             <TextInput
               value={nameInput}
               onChangeText={setNameInput}
               placeholder="Your name (optional)"
               placeholderTextColor={colors.mutedForeground}
-              style={[styles.nameInput, { borderColor: colors.border, color: colors.foreground, backgroundColor: colors.background }]}
+              style={[
+                styles.nameInput,
+                {
+                  borderColor: colors.border,
+                  color: colors.foreground,
+                  backgroundColor: colors.background,
+                },
+              ]}
               autoFocus
+              returnKeyType="done"
+              onSubmitEditing={handleOnboardingDone}
             />
             <TouchableOpacity
               onPress={handleOnboardingDone}
               style={[styles.startButton, { backgroundColor: colors.primary }]}
+              activeOpacity={0.88}
             >
-              <Text style={styles.startButtonText}>Let's Start Learning</Text>
+              <Text style={styles.startButtonText}>Start Learning</Text>
+              <Ionicons name="arrow-forward" size={20} color="#fff" />
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
 
+      {/* Toast */}
+      {toastMsg && (
+        <View style={[styles.toast, { backgroundColor: colors.foreground }]}>
+          <Text style={[styles.toastText, { color: colors.background }]}>{toastMsg}</Text>
+        </View>
+      )}
+
       {/* Header */}
-      <View style={[styles.header, { paddingTop: topPad + 12, backgroundColor: colors.background, borderBottomColor: colors.border }]}>
+      <View
+        style={[
+          styles.header,
+          {
+            paddingTop: topPad + 10,
+            backgroundColor: colors.background,
+            borderBottomColor: colors.border,
+          },
+        ]}
+      >
         <View style={styles.headerLeft}>
-          <Text style={[styles.appName, { color: colors.primary }]}>Bolo</Text>
-          <Text style={[styles.appNameSub, { color: colors.foreground }]}> Urdu</Text>
+          <Text style={[styles.logo, { color: colors.primary }]}>Bolo</Text>
         </View>
         <View style={styles.headerRight}>
           <StreakBadge streak={currentStreak} />
           <XPCounter xp={totalXP} />
+          <TouchableOpacity onPress={() => router.push('/settings')} style={styles.settingsBtn}>
+            <Ionicons name="settings-outline" size={22} color={colors.mutedForeground} />
+          </TouchableOpacity>
         </View>
       </View>
 
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 24 }]}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Greeting */}
-        <View style={styles.greetingSection}>
-          <Text style={[styles.greeting, { color: colors.foreground }]}>{greeting}</Text>
-          <Text style={[styles.subGreeting, { color: colors.mutedForeground }]}>
-            {lessonsCompleted.length === 0
-              ? 'Ready to start your Urdu journey?'
-              : `${lessonsCompleted.length} lesson${lessonsCompleted.length !== 1 ? 's' : ''} completed`}
-          </Text>
-        </View>
-
-        {/* Continue Card */}
-        {currentLesson && (
+      {/* Greeting */}
+      <View style={[styles.greetingBar, { borderBottomColor: colors.border }]}>
+        <Text style={[styles.greeting, { color: colors.foreground }]}>{greeting}</Text>
+        {currentLevel && (
           <TouchableOpacity
-            onPress={() => router.push(`/lesson/${currentLesson.id}`)}
-            style={[styles.continueCard, { backgroundColor: colors.primary }]}
-            activeOpacity={0.88}
+            onPress={() => router.push(`/level/${currentLevel.levelId}`)}
+            style={[styles.continuePill, { backgroundColor: colors.primary }]}
           >
-            <View>
-              <Text style={styles.continueLabel}>Continue learning</Text>
-              <Text style={styles.continueTitle}>{currentLesson.title}</Text>
-            </View>
-            <Ionicons name="arrow-forward-circle" size={36} color="rgba(255,255,255,0.8)" />
+            <Text style={styles.continuePillText}>Continue</Text>
+            <Ionicons name="arrow-forward" size={14} color="#fff" />
           </TouchableOpacity>
         )}
+      </View>
 
-        {/* Lesson List */}
-        <Text style={[styles.sectionTitle, { color: colors.foreground }]}>All Lessons</Text>
-        {manifest.map((lesson) => {
-          const prog = getLessonProgress(lesson.id);
-          const isCompleted = lessonsCompleted.includes(lesson.id);
-          const isCurrent = currentLesson?.id === lesson.id;
-          return (
-            <LessonRow
-              key={lesson.id}
-              lesson={lesson}
-              isUnlocked={isLessonUnlocked(lesson.id)}
-              isCompleted={isCompleted}
-              bestScore={prog?.bestScore ?? 0}
-              isCurrent={isCurrent}
-              onPress={() => handleLessonPress(lesson)}
-            />
-          );
-        })}
-
-        {/* Settings Link */}
-        <TouchableOpacity
-          onPress={() => router.push('/settings')}
-          style={[styles.settingsLink, { borderTopColor: colors.border }]}
-        >
-          <Ionicons name="settings-outline" size={18} color={colors.mutedForeground} />
-          <Text style={[styles.settingsLinkText, { color: colors.mutedForeground }]}>Settings</Text>
-        </TouchableOpacity>
+      {/* Path */}
+      <ScrollView
+        ref={scrollRef}
+        style={styles.scroll}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 32 }]}
+        showsVerticalScrollIndicator={false}
+      >
+        {chapters.length > 0 && (
+          <PathView
+            chapters={chapters}
+            onLevelPress={handleLevelPress}
+            onLevelLocked={handleLevelLocked}
+            currentLevelId={currentLevel?.levelId ?? null}
+          />
+        )}
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
+  screen: { flex: 1 },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingBottom: 14,
+    paddingBottom: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-  },
-  appName: {
-    fontSize: 26,
+  headerLeft: {},
+  logo: {
+    fontSize: 28,
     fontFamily: 'Inter_700Bold',
-  },
-  appNameSub: {
-    fontSize: 26,
-    fontFamily: 'Inter_700Bold',
+    letterSpacing: -0.5,
   },
   headerRight: {
     flexDirection: 'row',
-    gap: 8,
     alignItems: 'center',
+    gap: 8,
   },
-  scroll: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    gap: 12,
-  },
-  greetingSection: {
-    marginBottom: 8,
-    gap: 4,
-  },
-  greeting: {
-    fontSize: 22,
-    fontFamily: 'Inter_700Bold',
-  },
-  subGreeting: {
-    fontSize: 15,
-    fontFamily: 'Inter_400Regular',
-  },
-  continueCard: {
-    borderRadius: 16,
-    padding: 20,
+  settingsBtn: { padding: 4 },
+  greetingBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 8,
-    shadowColor: '#0F766E',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  continueLabel: {
-    fontSize: 12,
-    fontFamily: 'Inter_500Medium',
-    color: 'rgba(255,255,255,0.8)',
-    letterSpacing: 0.5,
-    marginBottom: 4,
-  },
-  continueTitle: {
-    fontSize: 18,
-    fontFamily: 'Inter_700Bold',
-    color: '#fff',
-  },
-  sectionTitle: {
-    fontSize: 18,
+  greeting: {
+    fontSize: 17,
     fontFamily: 'Inter_600SemiBold',
-    marginTop: 4,
-    marginBottom: 4,
-  },
-  lessonRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 14,
-    borderWidth: 1,
-    padding: 14,
-    gap: 14,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  lessonNum: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexShrink: 0,
-  },
-  lessonNumText: {
-    fontSize: 16,
-    fontFamily: 'Inter_700Bold',
-  },
-  lessonInfo: {
     flex: 1,
-    gap: 2,
   },
-  lessonTitle: {
-    fontSize: 15,
-    fontFamily: 'Inter_600SemiBold',
-  },
-  lessonSubtitle: {
-    fontSize: 13,
-    fontFamily: 'Inter_400Regular',
-    lineHeight: 18,
-  },
-  lessonScore: {
-    fontSize: 12,
-    fontFamily: 'Inter_600SemiBold',
-    marginTop: 2,
-  },
-  lessonMeta: {
-    alignItems: 'center',
-    gap: 4,
-    flexShrink: 0,
-  },
-  lessonTime: {
-    fontSize: 12,
-    fontFamily: 'Inter_500Medium',
-  },
-  settingsLink: {
+  continuePill: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-    paddingTop: 20,
-    marginTop: 8,
-    borderTopWidth: StyleSheet.hairlineWidth,
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
   },
-  settingsLinkText: {
+  continuePillText: {
+    color: '#fff',
+    fontSize: 13,
+    fontFamily: 'Inter_600SemiBold',
+  },
+  scroll: { flex: 1 },
+  scrollContent: { paddingTop: 8 },
+  toast: {
+    position: 'absolute',
+    bottom: 80,
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    zIndex: 100,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  toastText: {
     fontSize: 14,
     fontFamily: 'Inter_500Medium',
   },
@@ -387,17 +254,28 @@ const styles = StyleSheet.create({
   modalCard: {
     width: '100%',
     maxWidth: 400,
-    borderRadius: 20,
+    borderRadius: 24,
     padding: 28,
     gap: 16,
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.2,
     shadowRadius: 16,
     elevation: 8,
   },
+  modalIconRow: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalEmoji: {
+    fontSize: 36,
+  },
   modalTitle: {
-    fontSize: 24,
+    fontSize: 26,
     fontFamily: 'Inter_700Bold',
     textAlign: 'center',
   },
@@ -414,11 +292,16 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     fontSize: 16,
     fontFamily: 'Inter_400Regular',
+    width: '100%',
   },
   startButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
     paddingVertical: 16,
     borderRadius: 14,
-    alignItems: 'center',
+    width: '100%',
     marginTop: 4,
   },
   startButtonText: {

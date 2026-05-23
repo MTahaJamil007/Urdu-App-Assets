@@ -1,12 +1,19 @@
 import { ExerciseResult } from './exercise';
 
-export interface LessonProgress {
-  lessonId: string;
+export interface LevelProgress {
+  levelId: string;
+  chapterId: string;
   startedAt: number | null;
   completedAt: number | null;
   bestScore: number;
   attemptCount: number;
-  exerciseResults: ExerciseResult[];
+}
+
+export interface ChapterProgress {
+  chapterId: string;
+  startedAt: number | null;
+  completedAt: number | null;
+  levelProgress: Record<string, LevelProgress>;
 }
 
 export interface UserPreferences {
@@ -22,7 +29,7 @@ export interface UserProgress {
   currentStreak: number;
   longestStreak: number;
   lastActivityDate: string | null;
-  lessonsCompleted: string[];
-  lessonProgress: Record<string, LessonProgress>;
+  chaptersCompleted: string[];
+  chapterProgress: Record<string, ChapterProgress>;
   preferences: UserPreferences;
 }
