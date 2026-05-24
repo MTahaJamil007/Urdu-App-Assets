@@ -1,9 +1,8 @@
 // AUTO-GENERATED — do not edit manually. Run `pnpm gen:audio` to regenerate.
-// This file is empty until real audio recordings are added to assets/audio/.
-// The app falls back to TTS (expo-speech) for any path not found here.
+// Add audio files to assets/audio/ then re-run this script.
+// Files present: 0
 const audioMap: Record<string, number> = {
-  // Example of what a populated entry looks like:
-  // "audio/C01/sabrina/C01-001-normal.m4a": require("../assets/audio/C01/sabrina/C01-001-normal.m4a"),
+  // No audio files found yet — all phrases will use TTS fallback.
 };
 
 export default audioMap;
