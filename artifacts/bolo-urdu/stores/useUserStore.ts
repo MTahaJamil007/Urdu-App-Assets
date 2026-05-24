@@ -14,12 +14,12 @@ export const useUserStore = create<UserStoreState>()(
   persist(
     (set) => ({
       hasCompletedOnboarding: false,
-      defaultVoicePackId: null,
+      defaultVoicePackId: 'taha' as VoicePackId,
       completeOnboarding: () => set({ hasCompletedOnboarding: true }),
       setDefaultVoicePack: (id) => set({ defaultVoicePackId: id }),
     }),
     {
-      name: 'bolo-user-v2',
+      name: 'bolo-user-v3',
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

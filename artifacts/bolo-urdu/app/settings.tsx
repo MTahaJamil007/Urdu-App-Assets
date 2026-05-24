@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -13,18 +14,71 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import voicePacks from '@/constants/voicePacks.json';
+import { audioService } from '@/services/audioService';
 import { useProgressStore } from '@/stores/useProgressStore';
+import { useUserStore } from '@/stores/useUserStore';
+import { VoicePackId } from '@/types/phrase';
 import { useColors } from '@/hooks/useColors';
+
+const PREVIEW_PHRASES: Record<VoicePackId, { roman: string; phraseId: string }> = {
+  taha:    { roman: 'Assalam alaikum', phraseId: 'C01-001' },
+  sabrina: { roman: 'Assalam alaikum', phraseId: 'C01-001' },
+  sameer:  { roman: 'Assalam alaikum', phraseId: 'C01-001' },
+  daniyal: { roman: 'Assalam alaikum', phraseId: 'C01-001' },
+};
 
 export default function SettingsScreen() {
   const colors = useColors();
   const insets = useSafeAreaInsets();
   const topPad = Platform.OS === 'web' ? 67 : insets.top;
+
   const { userName, setUserName, preferences, setPreference, totalXP, currentStreak, chaptersCompleted, reset } =
     useProgressStore();
+  const { defaultVoicePackId, setDefaultVoicePack } = useUserStore();
   const [nameInput, setNameInput] = useState(userName ?? '');
+  const [playingId, setPlayingId] = useState<VoicePackId | null>(null);
 
   const handleSaveName = () => setUserName(nameInput.trim());
+
+  const handlePreviewVoice = async (id: VoicePackId) => {
+    if (playingId) return;
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    setPlayingId(id);
+    const preview = PREVIEW_PHRASES[id];
+    // Build a minimal phrase object; audioService resolves path → audioMap → TTS fallback
+    await audioService.playPhrase(
+      {
+        id: 'C01-001',
+        chapterId: 'C01',
+        levelId: 'L1-1',
+        order: 1,
+        urdu: 'السلام علیکم',
+        roman: preview.roman,
+        english: 'Hello',
+        englishContextual: 'Hello',
+        gender: 'neutral',
+        category: 'greeting',
+        audio: {
+          taha:    { normal: 'audio/C01/taha/C01-001-normal.m4a',    slow: 'audio/C01/taha/C01-001-slow.m4a'    },
+          sabrina: { normal: 'audio/C01/sabrina/C01-001-normal.m4a', slow: 'audio/C01/sabrina/C01-001-slow.m4a' },
+          sameer:  { normal: 'audio/C01/sameer/C01-001-normal.m4a',  slow: 'audio/C01/sameer/C01-001-slow.m4a'  },
+          daniyal: { normal: 'audio/C01/daniyal/C01-001-normal.m4a', slow: 'audio/C01/daniyal/C01-001-slow.m4a' },
+        },
+        image: null,
+        exerciseTypes: ['INTRODUCE'],
+        notes: '',
+      },
+      'normal',
+      id,
+    );
+    setPlayingId(null);
+  };
+
+  const handleSelectVoice = (id: VoicePackId) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    setDefaultVoicePack(id);
+  };
 
   const handleReset = () => {
     Alert.alert(
@@ -35,16 +89,24 @@ export default function SettingsScreen() {
         {
           text: 'Reset',
           style: 'destructive',
-          onPress: () => {
-            reset();
-            router.replace('/');
-          },
+          onPress: () => { reset(); router.replace('/'); },
         },
       ]
     );
   };
 
-  const chaptersCount = chaptersCompleted.length;
+  const statusLabel: Record<string, string> = {
+    ready: 'Ready',
+    complete: 'Complete',
+    'in-progress': 'In progress',
+    pending: 'Coming soon',
+  };
+  const statusColor: Record<string, string> = {
+    ready: '#16A34A',
+    complete: '#16A34A',
+    'in-progress': '#D97706',
+    pending: colors.mutedForeground,
+  };
 
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
@@ -65,7 +127,7 @@ export default function SettingsScreen() {
           {[
             { icon: 'star' as const, color: '#D97706', label: 'Total XP', value: String(totalXP) },
             { icon: 'flame' as const, color: '#D97706', label: 'Streak', value: `${currentStreak} days` },
-            { icon: 'library' as const, color: colors.primary, label: 'Chapters done', value: String(chaptersCount) },
+            { icon: 'library' as const, color: colors.primary, label: 'Chapters done', value: String(chaptersCompleted.length) },
           ].map(({ icon, color, label, value }, i) => (
             <View key={label}>
               {i > 0 && <View style={[styles.divider, { backgroundColor: colors.border }]} />}
@@ -78,7 +140,80 @@ export default function SettingsScreen() {
           ))}
         </View>
 
-        {/* Name */}
+        {/* Voice Pack Picker */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.foreground }]}>Voice</Text>
+          <Text style={[styles.sectionDesc, { color: colors.mutedForeground }]}>
+            Choose whose voice you hear when phrases play.
+          </Text>
+          <View style={styles.voiceGrid}>
+            {(voicePacks as Array<{ id: string; displayName: string; description: string; gender: string; recordingStatus: string }>).map((pack) => {
+              const id = pack.id as VoicePackId;
+              const isSelected = defaultVoicePackId === id;
+              const isAvailable = pack.recordingStatus === 'ready' || pack.recordingStatus === 'complete';
+              const isPlaying = playingId === id;
+
+              return (
+                <TouchableOpacity
+                  key={id}
+                  onPress={() => isAvailable && handleSelectVoice(id)}
+                  disabled={!isAvailable}
+                  activeOpacity={isAvailable ? 0.75 : 1}
+                  style={[
+                    styles.voiceCard,
+                    {
+                      backgroundColor: isSelected ? colors.primary + '12' : colors.card,
+                      borderColor: isSelected ? colors.primary : colors.border,
+                      opacity: isAvailable ? 1 : 0.55,
+                    },
+                  ]}
+                >
+                  {/* Selected check */}
+                  {isSelected && (
+                    <View style={[styles.checkBadge, { backgroundColor: colors.primary }]}>
+                      <Ionicons name="checkmark" size={12} color="#fff" />
+                    </View>
+                  )}
+
+                  {/* Avatar */}
+                  <View style={[styles.voiceAvatar, { backgroundColor: isSelected ? colors.primary : colors.muted }]}>
+                    <Ionicons
+                      name={pack.gender === 'f' ? 'person' : 'person-outline'}
+                      size={22}
+                      color={isSelected ? '#fff' : colors.mutedForeground}
+                    />
+                  </View>
+
+                  <Text style={[styles.voiceName, { color: isSelected ? colors.primary : colors.foreground }]}>
+                    {pack.displayName}
+                  </Text>
+
+                  <Text style={[styles.voiceStatus, { color: statusColor[pack.recordingStatus] ?? colors.mutedForeground }]}>
+                    {statusLabel[pack.recordingStatus] ?? pack.recordingStatus}
+                  </Text>
+
+                  {/* Preview button */}
+                  {isAvailable && (
+                    <TouchableOpacity
+                      onPress={() => handlePreviewVoice(id)}
+                      disabled={!!playingId}
+                      style={[styles.previewBtn, { backgroundColor: isSelected ? colors.primary : colors.muted }]}
+                      hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                    >
+                      <Ionicons
+                        name={isPlaying ? 'pause' : 'volume-medium'}
+                        size={14}
+                        color={isSelected ? '#fff' : colors.mutedForeground}
+                      />
+                    </TouchableOpacity>
+                  )}
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+
+        {/* Profile */}
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.foreground }]}>Profile</Text>
           <View style={[styles.inputWrapper, { backgroundColor: colors.card, borderColor: colors.border }]}>
@@ -129,11 +264,8 @@ export default function SettingsScreen() {
             { key: 'hintsEnabled' as const, label: 'Hints', desc: 'Show hints during exercises' },
             { key: 'audioAutoplay' as const, label: 'Auto-play audio', desc: 'Play audio when exercise loads' },
             { key: 'reduceMotion' as const, label: 'Reduce motion', desc: 'Disable animations' },
-          ].map(({ key, label, desc }, i) => (
-            <View
-              key={key}
-              style={[styles.prefRow, { backgroundColor: colors.card, borderColor: colors.border }]}
-            >
+          ].map(({ key, label, desc }) => (
+            <View key={key} style={[styles.prefRow, { backgroundColor: colors.card, borderColor: colors.border }]}>
               <View style={styles.prefInfo}>
                 <Text style={[styles.prefLabel, { color: colors.foreground }]}>{label}</Text>
                 <Text style={[styles.prefDesc, { color: colors.mutedForeground }]}>{desc}</Text>
@@ -166,13 +298,7 @@ export default function SettingsScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1 },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingBottom: 12,
-    gap: 12,
-  },
+  header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingBottom: 12, gap: 12 },
   backBtn: { padding: 4 },
   headerTitle: { fontSize: 22, fontFamily: 'Inter_700Bold' },
   scroll: { flex: 1 },
@@ -185,29 +311,39 @@ const styles = StyleSheet.create({
   section: { gap: 12 },
   sectionTitle: { fontSize: 17, fontFamily: 'Inter_600SemiBold' },
   sectionDesc: { fontSize: 14, fontFamily: 'Inter_400Regular', lineHeight: 20, marginTop: -4 },
+  voiceGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
+  voiceCard: {
+    width: '47%',
+    borderRadius: 14,
+    borderWidth: 1.5,
+    padding: 14,
+    alignItems: 'center',
+    gap: 6,
+    position: 'relative',
+  },
+  checkBadge: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  voiceAvatar: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
+  voiceName: { fontSize: 15, fontFamily: 'Inter_700Bold' },
+  voiceStatus: { fontSize: 11, fontFamily: 'Inter_500Medium', letterSpacing: 0.3 },
+  previewBtn: { marginTop: 4, width: 32, height: 32, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
   inputWrapper: { borderRadius: 12, borderWidth: 1, paddingHorizontal: 16 },
   nameInput: { fontSize: 16, fontFamily: 'Inter_400Regular', paddingVertical: 14 },
   genderRow: { flexDirection: 'row', gap: 10 },
   genderBtn: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, alignItems: 'center' },
   genderBtnText: { fontSize: 14, fontFamily: 'Inter_600SemiBold' },
-  prefRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 12,
-    borderWidth: 1,
-    padding: 14,
-    gap: 12,
-  },
+  prefRow: { flexDirection: 'row', alignItems: 'center', borderRadius: 12, borderWidth: 1, padding: 14, gap: 12 },
   prefInfo: { flex: 1, gap: 2 },
   prefLabel: { fontSize: 15, fontFamily: 'Inter_500Medium' },
   prefDesc: { fontSize: 13, fontFamily: 'Inter_400Regular' },
-  resetBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    padding: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-  },
+  resetBtn: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 16, borderRadius: 12, borderWidth: 1 },
   resetBtnText: { fontSize: 15, fontFamily: 'Inter_600SemiBold' },
 });

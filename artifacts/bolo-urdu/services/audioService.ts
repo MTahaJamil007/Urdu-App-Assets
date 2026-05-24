@@ -46,12 +46,28 @@ function playFromTTS(roman: string, speed: 'normal' | 'slow'): Promise<void> {
   });
 }
 
+const PACK_ORDER: VoicePackId[] = ['taha', 'sabrina', 'sameer', 'daniyal'];
+
+function packHasFiles(id: VoicePackId): boolean {
+  return Object.keys(audioMap).some((k) => k.includes(`/${id}/`));
+}
+
 function resolveVoicePack(override?: VoicePackId): VoicePackId {
-  if (override) return override;
+  // Build candidate list: override → active → user default → priority order
+  const candidates: VoicePackId[] = [];
+  if (override) candidates.push(override);
   const active = useChapterStore.getState().activeVoicePackId;
-  if (active) return active;
+  if (active) candidates.push(active);
   const def = useUserStore.getState().defaultVoicePackId;
-  return def ?? 'sabrina';
+  if (def) candidates.push(def);
+  for (const p of PACK_ORDER) if (!candidates.includes(p)) candidates.push(p);
+
+  // Pick first candidate that actually has files bundled
+  for (const id of candidates) {
+    if (packHasFiles(id)) return id;
+  }
+  // Nothing has files yet — TTS will handle it downstream
+  return candidates[0] ?? 'taha';
 }
 
 export const audioService = {
